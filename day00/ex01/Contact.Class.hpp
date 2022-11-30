@@ -25,8 +25,6 @@ class Contact
 		std::string _Secret;
 
 	public:
-		Contact();
-		~Contact();
 		bool		printSumm(int i);
 		void		printContactInfo() const;
 		bool		addContact();

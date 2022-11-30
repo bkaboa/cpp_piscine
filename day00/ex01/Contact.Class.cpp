@@ -32,6 +32,7 @@ bool	Contact::printSumm(int i)
 	std::cout << '|';
 	printContactVar(_Nickname);
 	std::cout << '|';
+	std::cout << '\n';
 	return (true);
 }
 
@@ -46,23 +47,23 @@ void	Contact::printContactInfo(void) const
 
 bool	Contact::addContact(void)
 {
-	std::cout << "enter a new name:\n";
+	std::cout << "enter a new name : ";
 	std::getline(std::cin, this->_Name);
 	if (this->_Name.empty())
-		clear();
-	std::cout << "enter a new last name:\n";
+		return (clear());
+	std::cout << "enter a new last name : ";
 	std::getline(std::cin, this->_LastName);
 	if (this->_LastName.empty())
-		clear();
-	std::cout << "enter a new nickname:\n";
+		return (clear());
+	std::cout << "enter a new nickname : ";
 	std::getline(std::cin, this->_Nickname);
 	if (this->_Nickname.empty())
-		clear();
-	std::cout << "enter a new number:\n";
+		return (clear());
+	std::cout << "enter a new number : ";
 	std::getline(std::cin, this->_Number);
 	if (this->_Number.empty())
-		clear();
-	std::cout << "enter a new secret:\n";
+		return (clear());
+	std::cout << "enter a new secret : ";
 	std::getline(std::cin, this->_Secret);
 	if (this->_Secret.empty())
 		return (clear());

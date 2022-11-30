@@ -1,17 +1,20 @@
-SRC 		= 	Contact.Class.cpp my_phone_book.cpp
+NAME 		= 	phonebook
+
+SRC 		= 	my_phone_book.cpp Contact.Class.cpp
+HEADER 		= 	Contact.Class.hpp
+
+OBJS 		= 	$(SRC:.cpp=.o))
+
 CPPFLAGS 	= 	-Wall -Wextra -Werror -std=c++98
 GPP 		= 	g++
-HEADER 		= 	Contact.Class.hpp
-NAME 		= 	phonebook
-OBJS 		= 	$(SRC:./c=.o)
 
-all 	: 	$(NAME)
+all: $(NAME)
 
-%.o 	: 	%.c $(HEADER) Makefile
-	$(GPP) $(CPPFLAGS) -I -c $< -o $@
+%.o:%.cpp
+	$(CPP) $(CPPFLAGS) -o $@ -c $<
 
-$(NAME) : 	$(OBJS)
-	$(GPP) $(CPPFLAGS) -o $@ $^
+$(NAME): $(OBJS)
+	$(GPP) -o $(NAME) $(OBJS)
 
 clean 	:
 	rm $(OBJS)
