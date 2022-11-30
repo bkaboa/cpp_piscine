@@ -1,0 +1,18 @@
+SRC 	= 	megaphone.cpp
+GPP 	= 	g++
+NAME 	= 	megaphone
+CFLAGS 	= 	-Wall -Wextra -Werror -std=c++98
+
+all 	: 	$(NAME)
+
+$(NAME) : 	Makefile $(SRC)
+	$(GPP) $(CFLAGS) -o $@ $^
+
+clean 	:
+
+fclean 	: clean
+	rm $(NAME)
+
+re 		: fclean all
+
+.PHONY 	: megaphone all fclean re clean
