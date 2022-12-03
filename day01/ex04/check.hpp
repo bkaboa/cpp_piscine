@@ -5,15 +5,12 @@
 
 class Check
 {
-	private:
-		Application		&valour;
-
 	public:
-		Check(Application &);
+		Check();
 		~Check();
 
-		static void	checkArg(const int argc);
-		void	checkFile(void) const;
+		static void	checkArg(const int argc, const char **argv);
+		static void	checkFile(const char *fileName);
 };
 
 

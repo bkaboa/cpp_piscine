@@ -3,14 +3,15 @@
 
 # include <string>
 # include <iostream>
-#include <fstream>
+# include <fstream>
+# include <cstdlib>
 
 class Application
 {
 	private:
+		std::string		fileName;
 		std::string		oldString;
 		std::string		newString;
-		std::string		fileName;
 		std::string		newFileName;
 
 	public:

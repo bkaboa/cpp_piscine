@@ -6,11 +6,10 @@
 int main(int argc, char **argv)
 {
 
-	Check::checkArg(argc);
+	Check::checkArg(argc, (const char**)argv);
+	Check::checkFile(argv[1]);
 
 	Application	app(argv[1], argv[2], argv[3]);
-	Check		valour = Check(app);
-	valour.checkFile();
 	app.buidNewFile();
 	return (0);
 }

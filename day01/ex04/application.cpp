@@ -1,6 +1,6 @@
 #include "application.hpp"
 
-Application::Application(std::string fileName, std::string newString, std::string oldString): fileName(fileName), newString(newString), oldString(oldString) {}
+Application::Application(std::string fileName, std::string oldString, std::string newString): fileName(fileName), oldString(oldString), newString(newString) {}
 
 Application::~Application() {}
 
@@ -21,7 +21,8 @@ void	Application::buidNewFile(void)
 	{
 		getline(file, line);
 		replaceString(line);
-		out << line << std::endl;
+		if (!line.empty())
+			out << line << std::endl;
 	}
 }
 
@@ -37,6 +38,7 @@ void	Application::replaceString(std::string &line)
 			std::cout << i << '\n';
 			line.erase(i, oldString.length());
 			line.insert(i, newString);
+			i += oldString.length();
 		}
 	}
 }
