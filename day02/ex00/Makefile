@@ -1,11 +1,9 @@
-NAME 	= 	sedForNoobs
+NAME 	= 	firstCanon
 
 SRC 	= 	./main.cpp 			\
-			./application.cpp 	\
-			./check.cpp 		\
+			./Fixed.cpp
 
-HEADER 	= 	./application.hpp 	\
-			./check.hpp 		\
+HEADER 	= 	./Fixed.hpp
 
 OBJS 	= 	$(SRC:.cpp=.o)
 
