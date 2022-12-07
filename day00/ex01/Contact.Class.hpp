@@ -8,6 +8,7 @@
 # include <cstdio>
 # include <sstream>
 # include <cstdlib>
+# include <stdbool.h>
 
 class Contact
 {
