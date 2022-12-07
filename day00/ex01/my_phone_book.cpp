@@ -63,7 +63,8 @@ void	PhoneBook::searhContact(void) const
 		std::getline(std::cin, input);
 		index = input[0] - 48;
 	}
-	printContact(index - 1);
+	if (std::cin.good())
+		printContact(index - 1);
 }
 
 void	PhoneBook::addContact(Contact newContact)

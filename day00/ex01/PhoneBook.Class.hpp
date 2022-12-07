@@ -8,7 +8,7 @@ class	PhoneBook
 	private:
 		Contact	_data[8];
 		int		_nEntries;
-		void	printPhoneBook(void)const;
+		void	printPhoneBook(void) const;
 		void	printContact(int index) const;
 
 	public:

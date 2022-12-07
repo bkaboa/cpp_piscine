@@ -44,14 +44,14 @@ void	setVar(std::string message, std::string *contactVar)
 {
 	bool	extendAscci = false;
 
-	while (contactVar->empty() && std::cin.good() && extendAscci == false)
+	while ((contactVar->empty() || extendAscci == false) && std::cin.good())
 	{
 		std::cout << message;
 		std::getline(std::cin, *contactVar);
 		extendAscci = ftIsExtendAscii(*contactVar);
 		if (contactVar->empty() && std::cin.good())
 			std::cout << "the contact var can't be empty ";
-		if(extendAscci == false)
+		if (extendAscci == false)
 			std::cout << "phoneBook can't take extend ascii ";
 	}
 }
@@ -73,13 +73,13 @@ void	setNum(std::string message, std::string *numVar)
 
 	bool	isNum = false;
 
-	while (numVar->empty() && std::cin.good() && isNum == false)
+	while ((numVar->empty() || isNum == false) && std::cin.good())
 	{
 		std::cout << message;
 		std::getline(std::cin, *numVar);
 		isNum = ftIsNum(*numVar);
 		if (isNum == false)
-			std::cout << "only number are expected in num var " << '\n';
+			std::cout << "only number are expected in num var ";
 		if (numVar->empty() && std::cin.good())
 			std::cout << "the contact var can't be empty ";
 	}
