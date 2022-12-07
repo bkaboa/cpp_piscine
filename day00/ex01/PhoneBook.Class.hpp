@@ -6,9 +6,8 @@
 class	PhoneBook
 {
 	private:
-		Contact	_Data[8];
-		int		_nContact;
-		int		_Entries;
+		Contact	_data[8];
+		int		_nEntries;
 		void	printPhoneBook(void)const;
 		void	printContact(int index) const;
 

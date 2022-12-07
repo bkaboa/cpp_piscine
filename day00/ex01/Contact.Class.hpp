@@ -5,15 +5,9 @@
 # include <string>
 # include <iostream>
 # include <iomanip>
-# include <features.h>
 # include <cstdio>
 # include <sstream>
 # include <cstdlib>
-
-static const std::string Exit		= "EXIT";
-static const std::string Add		= "ADD";
-static const std::string Search		= "SEARCH";
-
 
 class Contact
 {

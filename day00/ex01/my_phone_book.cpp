@@ -20,7 +20,7 @@ void	PhoneBook::printPhoneBook(void) const
 	std::cout << "|   index  |   name   |last name | nickname |\n";
 	for(int i = 0; i < 8; i++)
 	{
-		contact = this->_Data[i];
+		contact = this->_data[i];
 		std::cout << '|';
 		std::cout << std::setfill(' ') << std::setw(10) << i + 1;
 		std::cout << '|';
@@ -36,19 +36,19 @@ void	PhoneBook::printPhoneBook(void) const
 
 void	PhoneBook::printContact(int index) const
 {
-	std::cout << "name : " << _Data[index].getName() << '\n';
-	std::cout << "last name : " << _Data[index].getLastName() << '\n';
-	std::cout << "nickname : " << _Data[index].getNickname() << '\n';
-	std::cout << "number : " << _Data[index].getNumber() << '\n';
-	std::cout << "secret : " << _Data[index].getSecret() << '\n';
+	std::cout << "name : " << _data[index].getName() << '\n';
+	std::cout << "last name : " << _data[index].getLastName() << '\n';
+	std::cout << "nickname : " << _data[index].getNickname() << '\n';
+	std::cout << "number : " << _data[index].getNumber() << '\n';
+	std::cout << "secret : " << _data[index].getSecret() << '\n';
 }
 
 void	PhoneBook::searhContact(void) const
 {
-	int		index = 0;
+	int			index = 0;
 	std::string input;
 
-	if (_Entries == 0)
+	if (_nEntries == 0)
 	{
 		std::cout << "no contact for the moment\n";
 		return ;
@@ -56,20 +56,18 @@ void	PhoneBook::searhContact(void) const
 	printPhoneBook();
 	std::cout << "enter the contact index you want print : ";
 	std::getline(std::cin , input);
-	std::stringstream degree(input);
-	degree >> index;
-	while ((index <= 0 || index > 8 || index > _Entries) && std::cin.good())
+	index = input[0] - 48;
+	while ((index <= 0 || index > 8 || index > _nEntries || input.size() > 1) && std::cin.good())
 	{
 		std::cout << "enter a valid index : ";
 		std::getline(std::cin, input);
-		std::stringstream degree(input);
-		degree >> index;
+		index = input[0] - 48;
 	}
 	printContact(index - 1);
 }
 
 void	PhoneBook::addContact(Contact newContact)
 {
-	this->_Data[_Entries % 8] = newContact;
-	this->_Entries++;
+	this->_data[_nEntries % 8] = newContact;
+	this->_nEntries++;
 }
