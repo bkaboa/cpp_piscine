@@ -8,7 +8,7 @@
 # define CONSTRUCTOR		"constructor called"
 # define CONSTRUCTOR_PARAM	"parametic constructor called"
 # define COPY_CONSTRUCTOR	"copy constructor called"
-# define DESTRUCTOR			"destroyer called"
+# define DESTRUCTOR			"destructor called"
 # define ASSIGNEMENT		"copy assignement called"
 
 class ClapTrap
