@@ -1,12 +1,11 @@
-NAME 	= 	BraiiiiiiinnnzzzZ
+NAME 		= 	claptrap
 
-SRC 	= 	./main.cpp 			\
-			./Zombie.cpp 		\
-			./zombieHorde.cpp
+SRC 		= 	./ClapTrap.cpp \
+				main.cpp
 
-OBJS 	= 	$(SRC:.cpp=.o)
+HEADER 		= 	./ClapTrap.hpp \
 
-HEADER 	= 	./Zombie.hpp
+OBJS 		= 	$(SRC:.cpp=.o)
 
 CPPFLAGS 	= 	-Wall -Wextra -Werror -std=c++98
 GPP 		= 	g++
@@ -20,10 +19,10 @@ $(NAME): $(OBJS)
 	$(GPP) $(CPPFLAGS) -o $@ $^
 
 clean 	:
-	rm $(OBJS)
+	@rm $(OBJS) || true
 
 fclean 	: 	clean
-	rm $(NAME)
+	@rm $(NAME) || true
 
 re 		: 	fclean all
 

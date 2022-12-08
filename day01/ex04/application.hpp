@@ -20,7 +20,7 @@ class Application
 
 		void		buidNewFile(void);
 		std::string	get_fileName(void) const;
-		void	replaceString(std::string &);
+		void		replaceString(std::string &);
 };
 
 #endif

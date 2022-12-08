@@ -18,7 +18,7 @@ all: $(NAME)
 	$(GPP) $(CPPFLAGS) -o $@ -c $<
 
 $(NAME): $(OBJS)
-	$(GPP) -o $@ $^
+	$(GPP) $(CPPFLAGS) -o $@ $^
 
 clean 	:
 	rm $(OBJS)
