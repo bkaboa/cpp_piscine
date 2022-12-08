@@ -1,28 +1,20 @@
 #include "ClapTrap.hpp"
-#include <string>
 
 ClapTrap::~ClapTrap(void){
 	std::cout << DESTRUCTOR << '\n';
 }
 
-ClapTrap::ClapTrap():_name("\0"), _hit(10), _energy(10), _attack(0){
+ClapTrap::ClapTrap() {
 	std::cout << CONSTRUCTOR << '\n';
 }
 
 ClapTrap::ClapTrap(const std::string Name):_name(Name), _hit(10), _energy(10), _attack(0) {
-	std::cout << CONSTRUCTOR << '\n';
+	std::cout << CONSTRUCTOR_PARAM << '\n';
 }
 
 ClapTrap::ClapTrap(const ClapTrap &clapTrap) {
 	std::cout << COPY_CONSTRUCTOR << '\n';
 	*this = clapTrap;
-}
-
-ClapTrap::ClapTrap(std::string name, int hit, int energy, int attack) {
-	_name = name;
-	_hit = hit;
-	_energy = energy;
-	_attack = attack;
 }
 
 void	ClapTrap::setName(const std::string str) {
@@ -106,9 +98,9 @@ ClapTrap &ClapTrap::operator=(const ClapTrap & other)
 
 std::ostream &operator<<(std::ostream &ostream, const ClapTrap &clapTrap)
 {
-	ostream << "name : " << clapTrap.getName() << '\n';
-	ostream << "hit point : " << clapTrap.getHit() << '\n';
-	ostream << "energy point : " << clapTrap.getEnergy() << '\n';
-	ostream << "attack point : " << clapTrap.getAttack() << '\n';
+	ostream << "claptrap name : " << clapTrap.getName() << '\n';
+	ostream << "claptrap hit point : " << clapTrap.getHit() << '\n';
+	ostream << "claptrap energy point : " << clapTrap.getEnergy() << '\n';
+	ostream << "claptrap attack point : " << clapTrap.getAttack() << '\n';
 	return (ostream);
 }

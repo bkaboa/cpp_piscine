@@ -1,19 +1,18 @@
 #ifndef CLAPTRAP
 # define CLAPTRAP
 
-#include <ostream>
 # include <string>
 # include <iostream>
 
-# define CONSTRUCTOR		"constructor called"
-# define CONSTRUCTOR_PARAM	"parametic constructor called"
-# define COPY_CONSTRUCTOR	"copy constructor called"
-# define DESTRUCTOR			"destructor called"
-# define ASSIGNEMENT		"copy assignement called"
+# define CONSTRUCTOR		"claptrap constructor called"
+# define CONSTRUCTOR_PARAM	"claptrap parametic constructor called"
+# define COPY_CONSTRUCTOR	"claptrap copy constructor called"
+# define DESTRUCTOR			"claptrap destructor called"
+# define ASSIGNEMENT		"claptrap copy assignement called"
 
 class ClapTrap
 {
-	private:
+	protected:
 		std::string	_name;
 		int			_hit;
 		int			_energy;

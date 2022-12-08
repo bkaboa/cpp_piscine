@@ -1,9 +1,11 @@
 NAME 		= 	claptrap
 
-SRC 		= 	./ClapTrap.cpp \
+SRC 		= 	./ClapTrap.cpp 	\
+				./ScavTrap.cpp 	\
 				main.cpp
 
 HEADER 		= 	./ClapTrap.hpp \
+				./ScavTrap.hpp
 
 OBJS 		= 	$(SRC:.cpp=.o)
 

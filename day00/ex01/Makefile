@@ -1,7 +1,7 @@
 NAME 		= 	phonebook
 
-SRC 		= 	my_phone_book.cpp \
-				Contact.Class.cpp \
+SRC 		=	PhoneBook.Class.cpp \
+				Contact.Class.cpp 	\
 				main.cpp
 
 HEADER 		= 	Contact.Class.hpp \

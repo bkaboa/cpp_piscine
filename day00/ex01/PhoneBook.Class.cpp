@@ -1,6 +1,6 @@
 #include "PhoneBook.Class.hpp"
 
-PhoneBook::PhoneBook() {}
+PhoneBook::PhoneBook():_nEntries(0) {}
 
 PhoneBook::~PhoneBook() {}
 
