@@ -6,13 +6,13 @@ CFLAGS 	= 	-Wall -Wextra -Werror -std=c++98
 all 	: 	$(NAME)
 
 $(NAME) : 	Makefile $(SRC)
-	$(GPP) $(CFLAGS) -o $@ $^
+	$(GPP) $(CFLAGS) -o $@ $(SRC)
 
 clean 	:
 
 fclean 	: clean
-	rm $(NAME)
+	@rm $(NAME) || true
 
 re 		: fclean all
 
-.PHONY 	: megaphone all fclean re clean
+.PHONY 	: all fclean re clean

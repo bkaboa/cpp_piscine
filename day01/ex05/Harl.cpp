@@ -1,12 +1,22 @@
 #include "Harl.hpp"
 
+Harl::Harl() {}
+
+Harl::~Harl() {}
+
 void	Harl::complain(std::string level)
 {
 	std::string	str[] = {"DEBUG", "ERROR", "INFO", "WARNING"};
-	void (Harl::*ptr[4])(void) = {&Harl::debug, &Harl::info, &Harl::warning, &Harl::error};
+	void (Harl::*ptr[4])(void) = {&Harl::debug, &Harl::error, &Harl::info, &Harl::warning};
 	for(int i = 0;i < 4; i++)
+	{
 		if (level == str[i])
-			this->*ptr[i](void);
+		{
+			(this->*ptr[i])();
+			return ;
+		}
+	}
+	std::cout << "DEBUG ERROR INFO WARNING are expected" << '\n';
 }
 
 void	Harl::debug( void ) {

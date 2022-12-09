@@ -23,8 +23,8 @@ clean:
 	@rm $(OBJS) || true
 
 fclean: clean
-	@rm $(name) || true
+	@rm $(NAME) || true
 
 re: fclean all
 
-.PHONY 	: 	phonebook fclean all clean re
+.PHONY 	: 	fclean all clean re
