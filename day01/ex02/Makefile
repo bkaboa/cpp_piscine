@@ -16,10 +16,10 @@ $(NAME): $(OBJS)
 	$(GPP) -o $@ $^
 
 clean 	:
-	rm $(OBJS) || true
+	@rm $(OBJS) || true
 
 fclean 	: 	clean
-	rm $(NAME) || true
+	@rm $(NAME) || true
 
 re 		: 	fclean all
 
