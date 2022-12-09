@@ -6,7 +6,7 @@ CFLAGS 	= 	-Wall -Wextra -Werror -std=c++98
 all 	: 	$(NAME)
 
 $(NAME) : 	Makefile $(SRC)
-	$(GPP) $(CFLAGS) -o $@ $(SRC)
+	$(GPP) $(CFLAGS) -o $@ $^
 
 clean 	:
 

@@ -11,7 +11,7 @@ HEADER 	= 	./HumanA.hpp 	\
 
 OBJS 	= 	$(SRC:.cpp=.o)
 
-CPPFLAGS 	= 	-Wall -Wextra -Werror -std=c++98 -fsanitize=address
+CPPFLAGS 	= 	-Wall -Wextra -Werror -std=c++98 -fsanitize=address -g3
 GPP 		= 	g++
 
 all: $(NAME)
@@ -23,11 +23,11 @@ $(NAME): $(OBJS)
 	$(GPP) $(CPPFLAGS) -o $@ $^
 
 clean 	:
-	rm $(OBJS)
+	@rm $(OBJS) || true
 
 fclean 	: 	clean
-	rm $(NAME)
+	@rm $(NAME) || true
 
 re 		: 	fclean all
 
-.PHONY 	: 	phonebook fclean all clean re
+.PHONY 	: 	fclean all clean re

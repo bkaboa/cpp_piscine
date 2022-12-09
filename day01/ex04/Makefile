@@ -21,11 +21,11 @@ $(NAME): $(OBJS)
 	$(GPP) $(CPPFLAGS) -o $@ $^
 
 clean 	:
-	rm $(OBJS)
+	@rm $(OBJS) || true
 
 fclean 	: 	clean
-	rm $(NAME)
+	@rm $(NAME) || true
 
 re 		: 	fclean all
 
-.PHONY 	: 	phonebook fclean all clean re
+.PHONY 	: 	fclean all clean re

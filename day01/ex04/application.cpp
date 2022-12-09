@@ -35,7 +35,6 @@ void	Application::replaceString(std::string &line)
 		i = line.find(oldString, i);
 		if (i != -1)
 		{
-			std::cout << i << '\n';
 			line.erase(i, oldString.length());
 			line.insert(i, newString);
 			i += oldString.length();
