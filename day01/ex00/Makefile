@@ -10,7 +10,7 @@ OBJS 	= 	$(SRC:.cpp=.o)
 HEADER 	= 	./Zombie.hpp
 
 CPPFLAGS 	= 	-Wall -Wextra -Werror -std=c++98
-GPP 		= 	g++
+GPP 		= 	c++
 
 all: $(NAME)
 

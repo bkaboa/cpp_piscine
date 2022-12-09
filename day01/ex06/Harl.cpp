@@ -26,25 +26,25 @@ void	Harl::complain(std::string level)
 }
 
 void	Harl::debug( void ) {
-	std::cout << DEBUG << '\n';
+	std::cout << "[DEBUG]" << '\n'  << DEBUG << '\n';
 }
 
 void	Harl::info( void ) {
-	std::cout << INFO << '\n';
+	std::cout << "[IFNO]"  << '\n'  << INFO << '\n';
 }
 
 void	Harl::warning( void){
-	std::cout << WARNING << '\n';
+	std::cout << "[WARNING]"  << '\n'  <<WARNING << '\n';
 }
 
 void	Harl::error( void ) {
-	std::cout << ERROR << '\n';
+	std::cout << "[ERROR]" << '\n' << ERROR << '\n';
 }
 
 int	indexReturn(std::string level)
 {
 	int	i;
-	std::string	str[] = {"DEBUG", "ERROR", "INFO", "WARNING"};
+	std::string	str[] = {"INFO", "DEBUG", "WARNING", "ERROR"};
 
 	for (i = 0; i < 4 && str[i] != level; i++);
 	return (i);
