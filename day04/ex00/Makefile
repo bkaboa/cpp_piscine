@@ -1,11 +1,13 @@
-NAME 		= 	claptrap
+NAME 		= 	Animal
 
-SRC 		= 	./ClapTrap.cpp 	\
-				./ScavTrap.cpp 	\
+SRC 		= 	./Animal.class.cpp 	\
+				./Cat.class.cpp 	\
+				./Dog.class.cpp 	\
 				main.cpp
 
-HEADER 		= 	./ClapTrap.hpp \
-				./ScavTrap.hpp
+HEADER 		= 	./Animal.class.hpp 	\
+				./Cat.class.hpp 	\
+				./Dog.class.hpp
 
 OBJS 		= 	$(SRC:.cpp=.o)
 
@@ -28,4 +30,4 @@ fclean 	: 	clean
 
 re 		: 	fclean all
 
-.PHONY 	: 	fclean all clean re
+.PHONY 	: 	phonebook fclean all clean re

@@ -4,7 +4,7 @@ ScavTrap::ScavTrap() {
 	std::cout << SCAV_CONSTRUCTOR << '\n';
 }
 
-ScavTrap::ScavTrap(const std::string name) {
+ScavTrap::ScavTrap(const std::string &name) {
 	std::cout << SCAV_CONSTRUCTOR_PARAM << '\n';
 	this->_name = name;
 	this->_hit = 100;

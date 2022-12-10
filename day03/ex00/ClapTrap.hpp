@@ -29,12 +29,12 @@ class ClapTrap
 		void	takeDamage(unsigned int amount);
 		void	beRepaired(unsigned int amount);
 
-		std::string	getName(void) const;
+		const std::string	&getName(void) const;
 		int			getHit(void) const;
 		int			getEnergy(void) const;
 		int			getAttack(void) const;
 
-		void	setName(const std::string);
+		void	setName(const std::string&);
 
 		ClapTrap &operator=(const ClapTrap &);
 };

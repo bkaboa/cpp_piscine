@@ -4,7 +4,7 @@ ClapTrap::~ClapTrap(void){
 	std::cout << DESTRUCTOR << '\n';
 }
 
-ClapTrap::ClapTrap():Name("\0"), Hit(10), Energy(10), Attack(0){
+ClapTrap::ClapTrap():Hit(10), Energy(10), Attack(0){
 	std::cout << CONSTRUCTOR << '\n';
 }
 
@@ -17,12 +17,12 @@ ClapTrap::ClapTrap(const ClapTrap &clapTrap) {
 	*this = clapTrap;
 }
 
-void	ClapTrap::setName(const std::string str)
+void	ClapTrap::setName(const std::string &str)
 {
 	this->Name = str;
 }
 
-std::string ClapTrap::getName(void) const {
+const std::string &ClapTrap::getName(void) const {
 	return (Name);
 }
 

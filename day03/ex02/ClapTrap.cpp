@@ -8,7 +8,7 @@ ClapTrap::ClapTrap() {
 	std::cout << CONSTRUCTOR << '\n';
 }
 
-ClapTrap::ClapTrap(const std::string Name):_name(Name), _hit(10), _energy(10), _attack(0) {
+ClapTrap::ClapTrap(const std::string &Name):_name(Name), _hit(10), _energy(10), _attack(0) {
 	std::cout << CONSTRUCTOR_PARAM << '\n';
 }
 
@@ -17,7 +17,7 @@ ClapTrap::ClapTrap(const ClapTrap &clapTrap) {
 	*this = clapTrap;
 }
 
-void	ClapTrap::setName(const std::string str) {
+void	ClapTrap::setName(const std::string &str) {
 	_name = str;
 }
 
@@ -33,7 +33,7 @@ void	ClapTrap::setattack(const int attack) {
 	_attack = attack;
 }
 
-std::string ClapTrap::getName(void) const {
+const std::string &ClapTrap::getName(void) const {
 	return (_name);
 }
 

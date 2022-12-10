@@ -20,7 +20,7 @@ class ClapTrap
 
 	public:
 		ClapTrap();
-		ClapTrap(const std::string);
+		ClapTrap(const std::string&);
 		ClapTrap(const ClapTrap &clap);
 		~ClapTrap();
 
@@ -30,12 +30,12 @@ class ClapTrap
 		void	takeDamage(unsigned int amount);
 		void	beRepaired(unsigned int amount);
 
-		std::string	getName(void) const;
+		const std::string	&getName(void) const;
 		int			getHit(void) const;
 		int			getEnergy(void) const;
 		int			getAttack(void) const;
 
-		void	setName(const std::string);
+		void	setName(const std::string&);
 		void	setHit(const int);
 		void	setenergy(const int);
 		void	setattack(const int);

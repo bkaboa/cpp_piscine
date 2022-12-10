@@ -26,4 +26,4 @@ fclean 	: 	clean
 
 re 		: 	fclean all
 
-.PHONY 	: 	phonebook fclean all clean re
+.PHONY 	: 	fclean all clean re
