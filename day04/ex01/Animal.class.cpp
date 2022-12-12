@@ -18,7 +18,7 @@ Animal::Animal(const std::string &type):type(type) {
 }
 
 const std::string	&Animal::getType(void) const {
-	return (type);
+	return (this->type);
 }
 
 Animal	&Animal::operator=(const Animal &otherAnimal)
@@ -36,4 +36,8 @@ std::ostream	&operator<<(std::ostream &ostream, const Animal &animal)
 
 void	Animal::makeSound() const {
 	std::cout << "animal don't make sound" << '\n';
+}
+
+void	Animal::setType(const std::string &str) {
+	this->type = str;
 }

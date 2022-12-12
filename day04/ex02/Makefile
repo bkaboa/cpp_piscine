@@ -5,12 +5,14 @@ SRC 		= 	./Animal.class.cpp 		\
 				./Dog.class.cpp 		\
 				./WrongAnimal.class.cpp \
 				./WrongCat.class.cpp 	\
+				./Brain.class.cpp 		\
 				main.cpp
 
 HEADER 		= 	./Animal.class.hpp 		\
 				./Cat.class.hpp 		\
 				./WrongAnimal.class.hpp \
 				./WrongCat.class.hpp 	\
+				./Brain.class.hpp 		\
 				./Dog.class.hpp
 
 OBJS 		= 	$(SRC:.cpp=.o)

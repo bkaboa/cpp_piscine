@@ -2,6 +2,7 @@
 # define DOG_CLASS
 
 #include "Animal.class.hpp"
+#include "Brain.class.hpp"
 
 # define D_CONSTRUCTOR			"Dog constructor called"
 # define D_CONSTRUCTOR_PARAM	"Dog parameter constructor called"
@@ -10,6 +11,9 @@
 
 class Dog: public Animal
 {
+	private:
+		Brain	*brain;
+
 	public:
 		Dog();
 		~Dog();

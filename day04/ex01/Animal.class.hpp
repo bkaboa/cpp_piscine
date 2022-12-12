@@ -25,6 +25,7 @@ class Animal
 
 		virtual void	makeSound() const;
 		const std::string	&getType() const;
+		void	setType(const std::string &);
 };
 
 std::ostream	&operator<<(std::ostream &, const Animal &);

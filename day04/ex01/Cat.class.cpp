@@ -2,10 +2,12 @@
 
 Cat::Cat():Animal("Cat") {
 	std::cout << C_CONSTRUCTOR << '\n';
+	this->brain = new Brain;
 }
 
 Cat::Cat(const std::string &cat):Animal(cat) {
 	std::cout << C_CONSTRUCTOR_PARAM << '\n';
+	this->brain = new Brain("think to make meoooooow");
 }
 
 Cat::Cat(const Cat &otherCat):Animal() {
@@ -15,11 +17,16 @@ Cat::Cat(const Cat &otherCat):Animal() {
 
 Cat::~Cat() {
 	std::cout << C_DESTRUCTOR << '\n';
+	delete brain;
 }
 
 Cat	&Cat::operator=(const Cat &otherCat)
 {
-	this->type = otherCat.getType();
+	if (this != &otherCat)
+	{
+		this->type = otherCat.getType();
+		this->brain = new Brain(*otherCat.brain);
+	}
 	return (*this);
 }
 
