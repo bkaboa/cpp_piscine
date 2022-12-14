@@ -8,7 +8,7 @@ HEADER 	= 	./Fixed.hpp
 OBJS 	= 	$(SRC:.cpp=.o)
 
 CPPFLAGS 	= 	-Wall -Wextra -Werror -std=c++98
-GPP 		= 	g++
+GPP 		= 	c++
 
 all: $(NAME)
 
