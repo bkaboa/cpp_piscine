@@ -2,6 +2,9 @@
 
 ScavTrap::ScavTrap() {
 	std::cout << SCAV_CONSTRUCTOR << '\n';
+	this->_hit = 100;
+	this->_energy = 50;
+	this->_attack = 20;
 }
 
 ScavTrap::ScavTrap(const std::string &name) {
@@ -28,9 +31,9 @@ void	ScavTrap::attack(const std::string &target)
 		std::cout << _name << " scavtrap attack " << target << '\n';
 		std::cout << "make " << _attack << " damage" << '\n';
 	}
-	if (_energy <= 0)
+	if (_energy <= 0 && _hit > 0)
 		std::cout << _name << " out of energy" << '\n';
-	if (_hit <= 0)
+	else
 		std::cout << _name << " already dead" << '\n';
 }
 

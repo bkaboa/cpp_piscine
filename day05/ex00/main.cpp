@@ -19,6 +19,6 @@ int	main(void)
 	bla2.upgrade();
 	} catch (std::exception &e) {
 		std::cout << bla2 << '\n';
-		std::cout << e.what() << '\n';
+		std::cout << "x1B[31m" << e.what() << '\n';
 	}
 }

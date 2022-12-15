@@ -1,14 +1,16 @@
-NAME 		= 	claptrap
+NAME 		= 	Bureaucrat
 
-SRC 		= 	./ClapTrap.cpp \
+SRC 		= 	./Bureaucrat.cpp 		\
+				./Form.cpp 				\
 				main.cpp
 
-HEADER 		= 	./ClapTrap.hpp \
+HEADER 		= 	./Bureaucrat.hpp 		\
+				./Form.hpp
 
 OBJS 		= 	$(SRC:.cpp=.o)
 
-CPPFLAGS 	= 	-Wall -Wextra -Werror -std=c++98
-GPP 		= 	c++
+CPPFLAGS 	= 	-Wall -Wextra -Werror -std=c++98 #-fsanitize=address -g3
+GPP 		= 	g++
 
 all: $(NAME)
 

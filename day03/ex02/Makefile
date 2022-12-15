@@ -12,7 +12,7 @@ HEADER 		= 	./ClapTrap.hpp 	\
 OBJS 		= 	$(SRC:.cpp=.o)
 
 CPPFLAGS 	= 	-Wall -Wextra -Werror -std=c++98
-GPP 		= 	g++
+GPP 		= 	c++
 
 all: $(NAME)
 
@@ -30,4 +30,4 @@ fclean 	: 	clean
 
 re 		: 	fclean all
 
-.PHONY 	: 	phonebook fclean all clean re
+.PHONY 	: 	fclean all clean re

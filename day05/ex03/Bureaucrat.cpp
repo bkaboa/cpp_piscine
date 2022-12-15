@@ -54,3 +54,18 @@ std::ostream	&operator<<(std::ostream &ostream, const Bureaucrat &otherBureau)
 	return (ostream);
 }
 
+void	Bureaucrat::signForm(const std::string &formName, bool sign) const
+{
+	if (sign)
+		std::cout << this->getName() << " signed " << formName << '\n';
+	else
+		std::cout << this->getName() << " couldn't sign " << formName << 
+			" because his grade is too low" << '\n';
+}
+
+void	Bureaucrat::executeForm(const AForm &form) {
+	if (form.execute(*this))
+		std::cout << this->getName() << " executed " << form.getName();
+	else
+		throw ExecutionException();
+}

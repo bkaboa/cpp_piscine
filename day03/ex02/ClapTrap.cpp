@@ -56,7 +56,7 @@ void	ClapTrap::attack(const std::string &target) {
 		std::cout << this->_name << " attack " << target << '\n';
 		return ;
 	}
-	if (this->_energy <= 0)
+	if (this->_energy <= 0 && this->_hit > 0)
 		std::cout << this->_name << "out of energy" << '\n';
 	else
 		std::cout << this->_name << " already dead" << '\n';
@@ -80,7 +80,7 @@ void	ClapTrap::beRepaired(unsigned int amount) {
 		std::cout << this->_name << " repaired " << amount << " Hit point" << '\n';
 		return ;
 	}
-	if (this->_energy <= 0)
+	if (this->_energy <= 0 && this->_hit > 0)
 		std::cout << this->_name << " out of energy" << '\n';
 	else
 		std::cout << this->_name << " already dead" << '\n';

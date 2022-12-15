@@ -2,6 +2,9 @@
 
 FragTrap::FragTrap() {
 	std::cout << FRAG_CONSTRUCTOR << '\n';
+	this->_hit = 100;
+	this->_energy = 100;
+	this->_attack = 30;
 }
 
 FragTrap::FragTrap(const std::string &name) {

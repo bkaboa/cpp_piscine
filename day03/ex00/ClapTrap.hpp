@@ -30,9 +30,9 @@ class ClapTrap
 		void	beRepaired(unsigned int amount);
 
 		const std::string	&getName(void) const;
-		int			getHit(void) const;
-		int			getEnergy(void) const;
-		int			getAttack(void) const;
+		int					getHit(void) const;
+		int					getEnergy(void) const;
+		int					getAttack(void) const;
 
 		void	setName(const std::string&);
 

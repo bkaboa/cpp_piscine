@@ -4,6 +4,7 @@ int main(void)
 {
 	ClapTrap	clapTrap("clap");
 	ClapTrap	bla;
+	ClapTrap	bla2("bla");
 
 	std::cout << clapTrap << '\n';
 
@@ -17,5 +18,19 @@ int main(void)
 
 	bla = clapTrap;
 	std::cout << bla  << '\n';
+	std::cout << bla2  << '\n';
+	bla2.attack("ouioui");
+	bla2.attack("ouioui");
+	bla2.attack("ouioui");
+	bla2.attack("ouioui");
+	bla2.attack("ouioui");
+	bla2.attack("ouioui");
+	bla2.attack("ouioui");
+	bla2.attack("ouioui");
+	bla2.attack("ouioui");
+	bla2.attack("ouioui");
+	bla2.attack("ouioui");
+	bla2.attack("ouioui");
+	bla2.attack("ouioui");
 	return (0);
 }
