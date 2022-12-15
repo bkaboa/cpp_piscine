@@ -11,7 +11,15 @@ class	Intern
 		Intern();
 		~Intern();
 		Intern(const Intern&);
-		AForm *makeForm(std::string&, std::string&);
+		AForm *makeForm(const std::string&, const std::string&);
+
+		class	InternMakeException:public std::exception
+	{
+		public:
+			virtual const char *what() const throw() {
+				return ("this Intern can't create that Form Exception");
+			}
+	};
 };
 
 #endif

@@ -5,12 +5,14 @@ SRC 		= 	./Bureaucrat.cpp 				\
 				./PresidentialPardonForm.cpp 	\
 				./RobotomyRequestForm.cpp 		\
 				./ShrubberyCreationForm.cpp 	\
+				./Intern.cpp 					\
 				main.cpp
 
 HEADER 		= 	./Bureaucrat.hpp 				\
 				./PresidentialPardonForm.hpp 	\
 				./RobotomyRequestForm.hpp 		\
 				./ShrubberyCreationForm.hpp 	\
+				./Intern.hpp 					\
 				./Form.hpp
 
 OBJS 		= 	$(SRC:.cpp=.o)
