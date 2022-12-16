@@ -9,6 +9,7 @@ class Bureaucrat;
 class AForm
 {
 	private:
+		const std::string	target;
 		const std::string	name;
 		bool				sign;
 		const int			execGrade;
@@ -16,11 +17,12 @@ class AForm
 	
 	public:
 		AForm();
-		AForm(const std::string&,int,int);
+		AForm(const std::string&, const std::string&,int,int);
 		AForm(const AForm&);
 		virtual ~AForm();
 
 		const std::string	&getName(void) const;
+		const std::string	&getTarget(void) const;
 		int					getExecGrade(void) const;
 		int					getSignGrade(void) const;
 		bool				getSign(void) const;
@@ -28,7 +30,7 @@ class AForm
 		void				setIsSigned(bool);
 
 		void				beSigned(const Bureaucrat&);
-		bool				virtual execute(Bureaucrat const &) const = 0;
+		void				virtual execute(Bureaucrat const &) const = 0;
 
 		const AForm			&operator=(const AForm&);
 
@@ -45,13 +47,6 @@ class AForm
 		public:
 			virtual const char *what() const throw() {
 				return ("Exception grade too low");
-			}
-	};
-		class GradeTooHightExceptionExecution:public std::exception
-	{
-		public:
-			virtual const char *what() const throw() {
-				return ("bureaucrat grade too low too execute this form");
 			}
 	};
 		class FormNotSigned:public std::exception

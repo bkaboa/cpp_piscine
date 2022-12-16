@@ -54,18 +54,28 @@ std::ostream	&operator<<(std::ostream &ostream, const Bureaucrat &otherBureau)
 	return (ostream);
 }
 
-void	Bureaucrat::signForm(const std::string &formName, bool sign) const
-{
-	if (sign)
-		std::cout << this->getName() << " signed " << formName << '\n';
-	else
-		std::cout << this->getName() << " couldn't sign " << formName << 
-			" because his grade is too low" << '\n';
+void	Bureaucrat::executeForm(const AForm &form) {
+	try{
+		form.execute(*this);
+		std::cout << this->getName() << " executed " << form.getName() << '\n';
+	}
+	catch (std::exception &e) {
+		std::cout << "\x1B[31m" << this->getName() << " couldn't execute " << form.getName() << ' ' << e.what() << "\x1B[0m" << '\n';
+	}
 }
 
-void	Bureaucrat::executeForm(const AForm &form) {
-	if (form.execute(*this))
-		std::cout << this->getName() << " executed " << form.getName();
+void	Bureaucrat::signForm(AForm &form) const
+{
+	if (form.getSign())
+		std::cout << "\x1B[31m" << this->getName() << " couldn’t sign " << form.getName() << " because the form is already signed" << "\x1B[0m" << '\n';
 	else
-		throw ExecutionException();
+	{
+		try {
+			form.beSigned(*this);
+			std::cout << this->getName() << " signed " << form.getName() << '\n';
+		} 
+		catch (std::exception &e) {
+			std::cout << "\x1B[31m" << this->getName() << " couldn't sign " << form.getName() << " because the bureaucrat grade too low" << "\x1B[0m" << '\n';
+		}
+	}
 }

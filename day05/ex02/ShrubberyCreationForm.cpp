@@ -1,21 +1,17 @@
 #include "ShrubberyCreationForm.hpp"
 
-ShrubberyCreationForm::ShrubberyCreationForm():AForm("ShrubberyCreationForm", 137, 145) {}
+ShrubberyCreationForm::ShrubberyCreationForm():AForm("fangorn forest", "ShrubberyCreationForm", 137, 145) {}
 
-ShrubberyCreationForm::ShrubberyCreationForm(const std::string &target):AForm("ShrubberyCreationForm", 137, 145), target(target) {}
+ShrubberyCreationForm::ShrubberyCreationForm(const std::string &target):AForm(target, "ShrubberyCreationForm", 137, 145) {}
 
-ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &other):AForm(other.getName(), other.getExecGrade(), other.getSignGrade()){
-	this->target = other.getTarget();
+ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &other):AForm(other.getTarget(), other.getName(), other.getExecGrade(), other.getSignGrade()){
 	*this = other;
 }
 
 const ShrubberyCreationForm	&ShrubberyCreationForm::operator=(const ShrubberyCreationForm &other)
 {
 	if (this != &other)
-	{
 		this->setIsSigned(other.getSign());
-		this->setTarget(other.getTarget());
-	}
 	return (*this);
 }
 
@@ -26,24 +22,12 @@ void createFilePutTreeIn(std::string target)
 	out << tree << std::endl;
 }
 
-bool	ShrubberyCreationForm::execute(const Bureaucrat &executor) const
+void	ShrubberyCreationForm::execute(const Bureaucrat &executor) const
 {
 	if (!this->getSign())
 		throw FormNotSigned();
 	else if (this->getExecGrade() < executor.getGrade())
-		throw GradeTooHightExceptionExecution();
-	else
-	{
+		throw GradeTooLowException();
+	else 
 		createFilePutTreeIn(this->getTarget());
-		return (true);
-	}
-	return (false);
-}
-
-const std::string	&ShrubberyCreationForm::getTarget(void) const {
-	return (target);
-}
-
-void	ShrubberyCreationForm::setTarget(const std::string &target){
-	this->target = target;
 }

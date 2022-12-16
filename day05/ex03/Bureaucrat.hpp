@@ -40,22 +40,13 @@ class	Bureaucrat
 				return ("grade too low Exception");
 			}
 	};
-		class ExecutionException:public std::exception
-	{
-		public:
-			virtual const char *what() const throw()
-			{
-				return ("bureaucrat can't execute file");
-			}
-	};
-
 
 		void				upgrade(void);
 		void				downgrade(void);
 		Bureaucrat			&operator=(const Bureaucrat&);
 		const std::string	&getName(void) const;
 		int					getGrade(void) const;
-		void				signForm(const std::string&, bool) const;
+		void				signForm(AForm &) const;
 		void				executeForm(AForm const & form);
 };
 
