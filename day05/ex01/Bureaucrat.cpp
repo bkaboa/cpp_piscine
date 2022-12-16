@@ -54,14 +54,14 @@ std::ostream	&operator<<(std::ostream &ostream, const Bureaucrat &otherBureau)
 	return (ostream);
 }
 
-void	Bureaucrat::signForm(const Form &form) const
+void	Bureaucrat::signForm(Form &form) const
 {
 	if (form.getSign())
 		std::cout << this->getName() << " couldn’t sign " << form.getName() << " because the form is already signed" << '\n';
 	else
 	{
 		try {
-			form.beSigned(this);
+			form.beSigned(*this);
 			std::cout << this->getName() << " signed " << form.getName() << '\n';
 		} 
 		catch (std::exception &e) {

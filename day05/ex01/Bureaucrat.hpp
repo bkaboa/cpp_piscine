@@ -7,6 +7,8 @@
 # include <exception>
 # include "Form.hpp"
 
+class Form;
+
 class	Bureaucrat
 {
 	private:
@@ -44,7 +46,7 @@ class	Bureaucrat
 		Bureaucrat	&operator=(const Bureaucrat&);
 		const std::string	&getName(void) const;
 		int	getGrade(void) const;
-		void	signForm(const Form &) const;
+		void	signForm(Form &) const;
 };
 
 std::ostream	&operator<<(std::ostream&, const Bureaucrat&);
