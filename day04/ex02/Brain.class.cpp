@@ -19,7 +19,7 @@ Brain::Brain(const Brain &brain) {
 }
 
 Brain	&Brain::operator=(const Brain &otherB){
-	for (int i = 0;!otherB.ideas[i].empty();i++)
+	for (int i = 0; i < 100;i++)
 		this->ideas[i] = otherB.ideas[i];
 	return (*this);
 }

@@ -24,3 +24,8 @@ WrongCat	&WrongCat::operator=(const WrongCat &otherWC)
 	this->_type = otherWC.getType();
 	return(*this);
 }
+
+void	WrongCat::makesound() const
+{
+	std::cout << "what life, what univers, what am i, a cat or an animal" << '\n';
+}

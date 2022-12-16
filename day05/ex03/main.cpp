@@ -12,6 +12,7 @@ int	main(void)
 
 	Bureaucrat jean("jean", 1);
 	AForm *bla = doWork.makeForm("ShrubberyCreationForm", "tree");
+	jean.executeForm(*bla);
 	//AForm *bla2 = doWork.makeForm("fwoie", "truc");
 	bla->beSigned(jean);
 	bla->execute(jean);

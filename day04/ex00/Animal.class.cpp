@@ -13,10 +13,6 @@ Animal::Animal(const Animal &otherAnimal) {
 	*this = otherAnimal;
 }
 
-Animal::Animal(const std::string &type):type(type) {
-	std::cout << A_CONSTRUCTOR_PARAM << '\n';
-}
-
 const std::string	&Animal::getType(void) const {
 	return (type);
 }

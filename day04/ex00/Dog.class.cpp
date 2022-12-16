@@ -1,11 +1,8 @@
 #include "Dog.class.hpp"
 
-Dog::Dog():Animal("Dog") {
+Dog::Dog() {
 	std::cout << D_CONSTRUCTOR << '\n';
-}
-
-Dog::Dog(const std::string &cat):Animal(cat) {
-	std::cout << D_CONSTRUCTOR_PARAM << '\n';
+	this->type = "Dog";
 }
 
 Dog::Dog(const Dog &otherDog):Animal() {

@@ -21,6 +21,7 @@ class	Brain
 
 		const std::string	*getIdeas(void) const;
 		void	printIdeas(void)	const;
+		void	set10IdeaLine(const std::string &);
 		Brain &operator=(const Brain &);
 };
 

@@ -20,11 +20,32 @@ int main()
 	std::cout << '\n';
 	std::cout << '\n';
 	std::cout << '\n';
-	Dog	boogy("truc");
+	Dog	boogy;
 	Dog	trol(boogy);
-	Dog	*poupou = new Dog(boogy);
+	Dog	poupou;
+	{
+		Dog truc = poupou;
+		truc.printBrain();
+		std::cout << '\n';
+		std::cout << '\n';
+		std::cout << '\n';
+		poupou.printBrain();
+		std::cout << '\n';
+		std::cout << '\n';
+		std::cout << '\n';
+		poupou.set10BrainLine("fweuifwe");
+		Dog	bla = poupou;
+		truc.printBrain();
+		std::cout << '\n';
+		std::cout << '\n';
+		std::cout << '\n';
+		poupou.printBrain();
+		std::cout << '\n';
+		std::cout << '\n';
+		std::cout << '\n';
+		bla.printBrain();
+	}
 	std::cout << boogy << '\n';
 	std::cout << trol << '\n';
-	std::cout << *poupou << '\n';
-	delete poupou;
+	std::cout << poupou << '\n';
 }

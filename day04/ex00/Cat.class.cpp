@@ -1,11 +1,8 @@
 #include "Cat.class.hpp"
 
-Cat::Cat():Animal("Cat") {
+Cat::Cat() {
 	std::cout << C_CONSTRUCTOR << '\n';
-}
-
-Cat::Cat(const std::string &cat):Animal(cat) {
-	std::cout << C_CONSTRUCTOR_PARAM << '\n';
+	this->type = "Cat";
 }
 
 Cat::Cat(const Cat &otherCat):Animal() {

@@ -21,7 +21,7 @@ int main()
 	std::cout << '\n';
 	std::cout << '\n';
 	std::cout << '\n';
-	Dog	boogy("truc");
+	Dog	boogy;
 	Dog	trol(boogy);
 	Dog	*poupou = new Dog(boogy);
 	std::cout << boogy << '\n';

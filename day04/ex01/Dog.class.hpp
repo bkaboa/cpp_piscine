@@ -17,9 +17,10 @@ class Dog: public Animal
 	public:
 		Dog();
 		~Dog();
-		Dog(const std::string &);
 		Dog(const Dog &);
 
+		void	printBrain(void) const;
+		void	set10BrainLine(const std::string &) const;
 		void makeSound() const;
 		Dog	&operator=(const Dog &);
 };

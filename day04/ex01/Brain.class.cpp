@@ -19,7 +19,7 @@ Brain::Brain(const Brain &brain) {
 }
 
 Brain	&Brain::operator=(const Brain &otherB){
-	for (int i = 0;!otherB.ideas[i].empty();i++)
+	for (int i = 0;i < 100;i++)
 		this->ideas[i] = otherB.ideas[i];
 	return (*this);
 }
@@ -29,6 +29,10 @@ const std::string	*Brain::getIdeas(void) const{
 }
 
 void	Brain::printIdeas(void) const {
-	for (int i = 0; !ideas[i].empty();i++)
+	for (int i = 0; i < 20 ;i++)
 		std::cout << ideas[i] << '\n';
+}
+
+void	Brain::set10IdeaLine(const std::string &str) {
+	ideas[10] = str;
 }

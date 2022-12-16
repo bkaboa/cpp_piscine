@@ -1,13 +1,9 @@
 #include "Cat.class.hpp"
 
-Cat::Cat():Animal("Cat") {
+Cat::Cat() {
 	std::cout << C_CONSTRUCTOR << '\n';
 	this->brain = new Brain;
-}
-
-Cat::Cat(const std::string &cat):Animal(cat) {
-	std::cout << C_CONSTRUCTOR_PARAM << '\n';
-	this->brain = new Brain("think to make meoooooow");
+	this->type = "Cat";
 }
 
 Cat::Cat(const Cat &otherCat):Animal() {
