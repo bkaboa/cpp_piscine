@@ -36,3 +36,12 @@ std::ostream &operator<<(std::ostream &ostream, Cat &cat)
 	ostream << cat.getType() << '\n';
 	return (ostream);
 }
+
+void	Cat::printBrain(void) const {
+	brain->printIdeas();
+}
+
+void	Cat::set10BrainLine(const std::string &str) const
+{
+	brain->set10IdeaLine(str);
+}
