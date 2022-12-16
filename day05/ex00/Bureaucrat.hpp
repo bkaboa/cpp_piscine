@@ -19,7 +19,7 @@ class	Bureaucrat
 		Bureaucrat(const Bureaucrat&);
 		
 
-		class TooHighException :public std::exception
+		class GradeTooHighException :public std::exception
 	{
 		public:
 			virtual const char* what() const throw()
@@ -28,7 +28,7 @@ class	Bureaucrat
 			}
 	};
 
-		class TooLowException : public std::exception
+		class GradeTooLowException : public std::exception
 	{
 		public:
 			virtual const char* what() const throw()
@@ -41,8 +41,9 @@ class	Bureaucrat
 		void	upgrade(void);
 		void	downgrade(void);
 		Bureaucrat	&operator=(const Bureaucrat&);
+
 		const std::string	&getName(void) const;
-		int	getGrade(void) const;
+		int					getGrade(void) const;
 };
 
 std::ostream	&operator<<(std::ostream&, const Bureaucrat&);

@@ -1,7 +1,6 @@
 #ifndef FORM
 # define FORM
 
-# include <exception>
 # include "Bureaucrat.hpp"
 
 class Form

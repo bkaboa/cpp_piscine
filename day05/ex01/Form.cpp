@@ -5,11 +5,11 @@ Form::Form():sign(false), execGrade(150), signGrade(150) {}
 Form::Form(const std::string &name,int execlvl,int signlvl):name(name), sign(false), execGrade(execlvl), signGrade(signlvl) {
 	if (execlvl < 1 || signlvl < 1)
 		throw GradeTooHightException();
-	else if (execlvl > 159 || signlvl > 150)
+	else if (execlvl > 150 || signlvl > 150)
 		throw GradeTooLowException();
 }
 
-Form::Form(const Form &otherForm) : name(otherForm.name), sign(otherForm.sign), execGrade(otherForm.execGrade), signGrade(otherForm.signGrade) {
+Form::Form(const Form &otherForm) : name(otherForm.name), execGrade(otherForm.execGrade), signGrade(otherForm.signGrade) {
 	*this = otherForm;
 }
 
@@ -17,18 +17,10 @@ Form::~Form() {}
 
 void	Form::beSigned(const Bureaucrat &bureaucrat)
 {
-	if (this->getSign())
-		std::cout << "form " << this->getName() << " already signed" << '\n';
-	else if (this->getSignGrade() < bureaucrat.getGrade())
-	{
+	if (this->getSignGrade() < bureaucrat.getGrade())
 		throw GradeTooLowException();
-		bureaucrat.signForm(this->getName(), this->getSign());
-	}
 	else
-	{
 		this->setIsSigned();
-		bureaucrat.signForm(this->getName(), this->getSign());
-	}
 }
 
 const Form	&Form::operator=(const Form &otherForm)
