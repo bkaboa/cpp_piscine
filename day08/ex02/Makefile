@@ -1,8 +1,8 @@
-NAME 		= 	identify
+NAME 		= 	mutantstack
 
 SRC 		= 	main.cpp
 
-HEADER 		= 	./main.hpp
+HEADER 		= 	./MutantStack.hpp
 
 OBJS 		= 	$(SRC:.cpp=.o)
 

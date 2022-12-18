@@ -1,8 +1,9 @@
-NAME 		= 	identify
+NAME 		= 	span
 
-SRC 		= 	main.cpp
+SRC 		= 	main.cpp 	\
+				./span.cpp
 
-HEADER 		= 	./main.hpp
+HEADER 		= 	./Span.hpp
 
 OBJS 		= 	$(SRC:.cpp=.o)
 

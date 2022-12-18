@@ -43,17 +43,17 @@ class Array
 		}
 
 		unsigned int	getLenght(void) const{
-			return (lenght);
+			return (this->lenght);
 		}
 
 		const T &operator[](int idx) const {
-			if (static_cast<unsigned int>(idx) > lenght)
+			if (static_cast<unsigned int>(idx) >= lenght)
 				throw indexOutOfArray();
 			return (contents[idx]);
 		}
 
 		T &operator[](int idx) {
-			if (static_cast<unsigned int>(idx) > lenght)
+			if (static_cast<unsigned int>(idx) >= lenght)
 				throw indexOutOfArray();
 			return (contents[idx]);
 		}

@@ -1,8 +1,8 @@
-NAME 		= 	identify
+NAME 		= 	easyfind
 
 SRC 		= 	main.cpp
 
-HEADER 		= 	./main.hpp
+HEADER 		= 	./easyfind.hpp
 
 OBJS 		= 	$(SRC:.cpp=.o)
 

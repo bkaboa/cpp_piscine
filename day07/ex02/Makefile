@@ -6,7 +6,7 @@ HEADER 		= 	./Array.hpp
 
 OBJS 		= 	$(SRC:.cpp=.o)
 
-CPPFLAGS 	= 	-Wall -Wextra -Werror -std=c++98
+CPPFLAGS 	= 	-Wall -Wextra -Werror -std=c++98 #-fsanitize=address -g3
 GPP 		= 	c++
 
 all: $(NAME)

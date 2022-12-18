@@ -34,7 +34,7 @@ void testNegativeIndex() {
   try {
     arrayWithSize[-1] = 0;
   } catch (std::exception &e) {
-    std::cout << "Exception message: " << e.what() << std::endl;
+    std::cout << "\x1B[31m" << "Exception message: " << e.what() << "\x1B[0m" <<  std::endl;
   }
   std::cout << "End of Test\n" << std::endl;
 }
@@ -48,7 +48,7 @@ void testIndexSizeOfArray() {
   try {
     arrayWithSize[arrayWithSize.getLenght()] = 0;
   } catch (std::exception &e) {
-    std::cout << "Exception message: " << e.what() << std::endl;
+    std::cout << "\x1B[31m" << "Exception message: " << e.what() << "\x1B[0m" <<  std::endl;
   }
   std::cout << "End of Test\n" << std::endl;
 }
