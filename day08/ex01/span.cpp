@@ -1,9 +1,5 @@
 #include "Span.hpp"
 
-# include <list>
-# include <iostream>
-# include <limits>
-
 Span::Span() {}
 
 Span::Span(unsigned int N):N(N), numbers(std::list<int>()) {}
@@ -29,6 +25,16 @@ void	Span::addNumber(int number)
 	if (this->numbers.size() >= this->N)
 		throw FullException();
 	this->numbers.push_back(number);
+}
+
+void	Span::addNumbers(int lenght)
+{
+	while (this->numbers.size() < this->N && lenght-- > 0)
+	{
+		this->numbers.push_back(rand());
+	}
+	if (lenght > 0)
+		throw FullException();
 }
 
 unsigned int	Span::shortestSpan(void) const

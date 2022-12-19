@@ -17,10 +17,10 @@ class NotFoundException : public std::exception {
 
 template<typename T>
 typename T::iterator easyfind(T &container, int value) {
-  if (std::find(container.begin(), container.end(), value) != container.end()) {
-    return std::find(container.begin(), container.end(), value);
-  } else {
-    throw NotFoundException();
-  }
+	typename T::iterator	truc = std::find(container.begin(), container.end(), value);
+	if (truc != container.end()) {
+		return (truc);
+	}
+	throw NotFoundException();
 }
 #endif

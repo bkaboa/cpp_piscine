@@ -5,6 +5,7 @@
 # include <iostream>
 # include <list>
 # include <cstdlib>
+# include <limits>
 
 class Span
 {
@@ -20,7 +21,8 @@ class Span
 
 		Span	&operator=(const Span&);
 
-		void	addNumber(int);
+		void			addNumber(int);
+		void			addNumbers(int);
 		unsigned int	shortestSpan(void) const;
 		unsigned int	longestSpan(void) const;
 

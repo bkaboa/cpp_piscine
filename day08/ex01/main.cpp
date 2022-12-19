@@ -50,8 +50,7 @@ int main(void)
 	std::cout << '\n';
 	std::cout << "fourth test" << '\n';
 	Span truc3 = Span(10000);
-	for (int i = 0; i < 10000; i++)
-		truc3.addNumber(rand());
+	truc3.addNumbers(10000);
 	std::cout << truc3.longestSpan() << '\n';
 	std::cout << truc3.shortestSpan() << '\n';
 	std::cout << '\n';
