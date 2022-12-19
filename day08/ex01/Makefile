@@ -1,7 +1,7 @@
 NAME 		= 	span
 
 SRC 		= 	main.cpp 	\
-				./span.cpp
+				./Span.cpp
 
 HEADER 		= 	./Span.hpp
 
