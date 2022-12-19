@@ -12,7 +12,7 @@ void	iter(T *tab, size_t size, void (*function)(T &element))
 }
 
 template <typename T>
-void	printTab(T element)
+void	print(T element)
 {
 	std::cout << element << '\n';
 }

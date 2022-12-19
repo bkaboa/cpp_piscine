@@ -8,13 +8,13 @@ int main(void)
 	std::cout << "print str" << '\n';
 	std::cout << '\n';
 	std::cout << '\n';
-	iter(str, 3, &printTab);
+	iter(str, 3, &print);
 	std::cout << '\n';
 	std::cout << '\n';
 	std::cout << "print nbr" << '\n';
 	std::cout << '\n';
 	std::cout << '\n';
-	iter(nbr, 5, &printTab);
+	iter(nbr, 5, &print);
 	std::cout << "increment nbr" << '\n';
 	iter(nbr, 5, &increment);
 	std::cout << '\n';
@@ -22,5 +22,6 @@ int main(void)
 	std::cout << "print nbr" << '\n';
 	std::cout << '\n';
 	std::cout << '\n';
-	iter(nbr, 5, &printTab);
+	iter(nbr, 5, &print);
 }
+
