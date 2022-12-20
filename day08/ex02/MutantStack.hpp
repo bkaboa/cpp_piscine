@@ -25,6 +25,9 @@ class MutantStack:public std::stack<T>
 		typedef typename std::deque<T>::iterator iterator;
 		iterator	begin(void) {return (std::stack<T>::c.begin());}
 		iterator	end(void) {return (std::stack<T>::c.end());}
+		typedef typename std::deque<T>::reverse_iterator reverse_iterator;
+		reverse_iterator	rbegin(void) {return (std::stack<T>::c.rbegin());}
+		reverse_iterator	rend(void) {return (std::stack<T>::c.rend());}
 };
 
 #endif
