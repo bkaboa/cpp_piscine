@@ -17,25 +17,44 @@ public:
 	~PmergeMe();
 	
 	void				setArgs(const char **);
-	std::string			getArgs() const;
-	std::vector<long>	getSortVector() const;
-	std::list<long>		getSortList() const;
+	const std::string	&getArgs() const;
 
 	PmergeMe &operator=(const PmergeMe&);
 
 	void	beginSort();
 
+	class emptyArgs: public std::exception
+	{
+		public:
+			virtual const char* what() const throw()
+			{
+				return ("Error : no args");
+			}
+	};
+
+	class onlySpaceInString: public std::exception
+	{
+		public:
+			virtual const char* what() const throw()
+			{
+				return ("Error : only spce with no numbers are present in argv");
+			}
+	};
+
 private:
 	void	insertionSortVector(int, int);
 	void	mergeVector(int, int, int);
-	void	sortVector(int, int);
+	void	mergeSortVector(int, int);
+
 	void	insertionSortList(int, int);
 	void	mergeList(int, int, int);
-	void	sortList(int, int);
-	bool	setList();
-	bool	setVector();
+	void	mergeSortList(int, int);
 
-	long	&listAt(std::list<long> &l, int index);
+	void	setList();
+	void	setVector();
+
+	void	setListAt(int, long);
+	long	getListAt(int);
 
 	std::string			args;
 	std::vector<long>	vector;

@@ -1,6 +1,7 @@
 #include "PmergeMe.hpp"
+#include <cctype>
 #include <ctime>
-#include <vector>
+#include <stdexcept>
 
 PmergeMe::PmergeMe() {}
 
@@ -18,193 +19,255 @@ PmergeMe::~PmergeMe() {
 	list.clear();
 }
 
-
-std::string	PmergeMe::getArgs() const {
+const std::string	&PmergeMe::getArgs() const {
 	return (args);
 }
 
-std::vector<long> PmergeMe::getSortVector() const {
-	return (vector);
+long	PmergeMe::getListAt(int index)
+{
+	std::list<long>::iterator it = list.begin();
+	if (index < 0 || index > static_cast<int>(list.size()))
+		throw std::out_of_range("index out of range");
+	for (int i = 0; i < index; i++)
+		it++;
+	return (*it);
 }
 
-std::list<long> PmergeMe::getSortList() const {
-	return (list);
+void		PmergeMe::setVector()
+{
+	if (!vector.empty())
+		vector.clear();
+	for (std::string::iterator it = args.begin(); it != args.end(); it++)
+	{
+		if (std::isalnum(*it))
+		{
+			vector.push_back(std::atoi((const char*)it.base()));
+			while (it < args.end() && std::isalnum(*it))
+				it++;
+		}
+	}
+	if (vector.empty())
+		throw onlySpaceInString();
 }
 
-
+void	PmergeMe::setList()
+{
+	if (!list.empty())
+		list.clear();
+	for (std::string::iterator it = args.begin(); it != args.end(); it++)
+	{
+		if (std::isalnum(*it))
+		{
+			list.push_back(std::atoi((const char*)it.base()));
+			while (it < args.end() && std::isalnum(*it))
+				it++;
+		}
+	}
+	if (list.empty())
+		throw onlySpaceInString();
+}
 
 void	PmergeMe::setArgs(const char **argv)
 {
-	int i = 1;
+	int i = 0;
+	int j = 0;
 
-	args.assign(argv[i]);
 	while (argv[++i])
 	{
+		j = 0;
+		while (argv[i][j])
+			args.push_back(argv[i][j++]);
 		args.push_back(' ');
-		args.assign(argv[i]);
 	}
+	if (args.empty())
+		throw emptyArgs();
+}
+
+void	PmergeMe::setListAt(int index, long num)
+{
+	if (index < 0 || index >= static_cast<int>(list.size()))	
+		throw std::out_of_range("index out of range");
+	std::list<long>::iterator it = list.begin();
+	for (int i = 0; i < index; i++)
+		it++;
+	*it = num;
 }
 
 PmergeMe	&PmergeMe::operator=(const PmergeMe &otherPmergeMe) {
 	if (this != &otherPmergeMe)
-	{
-		this->vector = otherPmergeMe.getSortVector();
-		this->list = otherPmergeMe.getSortList();
 		this->args = otherPmergeMe.getArgs();
-	}
 	return (*this);
 }
 
 void	PmergeMe::insertionSortList(int start, int end)
 {
 	int j = 0;
-	long temp = 0;
-	for (int i = start; start < end; i++)
+	int temp = 0;
+	for (int i = start; i < end; i++)
 	{
 		j = i + 1;
-		temp = listAt(list, j);
-		while (j > start && listAt(list, j - 1) > temp)
+		temp = getListAt(j);
+		while (j > start && getListAt(j - 1) > temp)
 		{
-			listAt(list, j) = listAt(list, j - 1);
+			setListAt(j, getListAt(j - 1));
+			std::cout << getListAt(j) << '\n';
 			j--;
 		}
-		listAt(list, j) = temp;
+		setListAt(j, temp);
 	}
 }
 
-void	PmergeMe::mergeList(int start, int middle, int end)
-{
-	int n1 = middle - start + 1;
-	int n2 = end - middle;
-	int startIdx = 0;
-	int midIdx = 0;
-	long startToMiddle[n1];
-	long middleToEnd[n2];
-	std::list<long>::iterator it = list.begin();
+void PmergeMe::mergeList(int start, int mid, int end) {
+  
+  int n1 = mid - start + 1;
+  int n2 = end - mid;
 
-	for (int i = 0; i < start; i++)
-		it++;
-	for (int i = start; i < middle - 1; i++)
-	{
-		startToMiddle[i] = *it;
-		it++;
-	}
-	for (int i = middle; i < end; i++)
-	{
-		middleToEnd[i] = *it;
-		it++;
-	}
-	it = list.begin();
-	for (int i = 0; i < start; i++)
-		it++;
-	for (int i = start; i < end - start + 1; i++, it++)
-	{
-		if (midIdx == n2) {
-            *it = startToMiddle[startIdx];
-            startIdx++;
-        } else if (startIdx == n1) {
-            *it = middleToEnd[midIdx];
-            midIdx++;
-        } else if (middleToEnd[midIdx] > startToMiddle[startIdx]) {
-            *it = startToMiddle[startIdx];
-            startIdx++;
-        } else {
-            *it = middleToEnd[midIdx];
-            midIdx++;
-		}
-	}
+  long startToMiddle[n1], middleToEnd[n2];
 
+  for (int i = 0; i < n1; i++)
+    startToMiddle[i] = getListAt(start + i);
+  for (int j = 0; j < n2; j++)
+    middleToEnd[j] = getListAt(mid + 1 + j);
+
+  int i, j, k;
+  i = 0;
+  j = 0;
+  k = start;
+
+  while (i < n1 && j < n2) {
+    if (startToMiddle[i] <= middleToEnd[j]) {
+      setListAt(k, startToMiddle[i]);
+      i++;
+    } else {
+      setListAt(k, middleToEnd[j]);
+      j++;
+    }
+    k++;
+  }
+
+  while (i < n1) {
+    setListAt(k, startToMiddle[i]);
+    i++;
+    k++;
+  }
+
+  while (j < n2) {
+    setListAt(k, middleToEnd[j]);
+    j++;
+    k++;
+  }
 }
 
-void	PmergeMe::sortList(int start, int end)
+void	PmergeMe::mergeSortList(int start, int end)
 {
-	if (end - start > 15)
-	{
-		int middle = (start + end) / 2;
-		sortList(start, middle);
-		sortList(middle, end);
-		mergeList(start, middle, end);
-	}
+	if (start + 15 < end) {
+  	  int mid = start + (end - start) / 2;
+  	  mergeSortList(start, mid);
+  	  mergeSortList(mid + 1, end);
+  	  mergeList(start, mid, end);
+  	}
 	else
 		insertionSortList(start, end);
-}
-
-long	&PmergeMe::listAt(std::list<long> &l, int index)
-{
-	if (index < 0 || index > static_cast<int>(l.size()))
-		throw std::out_of_range("Index out of range");
-	typename std::list<long>::iterator it = l.begin();
-	for (int i = 0; i < index; i++, it++);
-	return (*it);
 }
 
 void	PmergeMe::insertionSortVector(int start, int end)
 {
 	int j = 0;
 	int temp = 0;
-	for (int i = start; start < end; i++)
+	for (int i = start; i < end; i++)
 	{
 		j = i + 1;
 		temp = vector[j];
 		while (j > start && vector[j - 1] > temp)
 		{
 			vector[j] = vector[j - 1];
+			std::cout << vector[j] << '\n';
 			j--;
 		}
 		vector[j] = temp;
 	}
 }
 
-void	PmergeMe::mergeVector(int start, int middle, int end)
-{
-	int n1 = middle - start + 1;
-	int n2 = end - middle;
-	int startIdx = 0;
-	int midIdx = 0;
-	long startToMiddle[n1];
-	long middleToEnd[n2];
+void PmergeMe::mergeVector(int start, int mid, int end) {
+  
+  int n1 = mid - start + 1;
+  int n2 = end - mid;
 
-	for (int i = 0; i < n1; i++)
-		startToMiddle[i] = vector[i];
-	for (int i = n1; i < n2; i++)
-		middleToEnd[i] = vector[i];
-	for (int i = start; i < end - start + 1; i++)
-	{
-		if (midIdx == n2) {
-            vector[i] = startToMiddle[startIdx];
-            startIdx++;
-        } else if (startIdx == n1) {
-            vector[i] = middleToEnd[midIdx];
-            midIdx++;
-        } else if (middleToEnd[midIdx] > startToMiddle[startIdx]) {
-            vector[i] = startToMiddle[startIdx];
-            startIdx++;
-        } else {
-            vector[i] = middleToEnd[midIdx];
-            midIdx++;
-		}
-	}
+  int startToMiddle[n1], middleToEnd[n2];
+
+  for (int i = 0; i < n1; i++)
+    startToMiddle[i] = vector[start + i];
+  for (int j = 0; j < n2; j++)
+    middleToEnd[j] = vector[mid + 1 + j];
+
+  int i, j, k;
+  i = 0;
+  j = 0;
+  k = start;
+
+  while (i < n1 && j < n2) {
+    if (startToMiddle[i] <= middleToEnd[j]) {
+      vector[k] = startToMiddle[i];
+      i++;
+    } else {
+      vector[k] = middleToEnd[j];
+      j++;
+    }
+    k++;
+  }
+
+  while (i < n1) {
+    vector[k] = startToMiddle[i];
+    i++;
+    k++;
+  }
+
+  while (j < n2) {
+    vector[k] = middleToEnd[j];
+    j++;
+    k++;
+  }
 }
 
-void	PmergeMe::sortVector(int start, int end)
-{
-	if (end - start > 15)
-	{
-		int middle = (start + end) / 2;
-		sortVector(start, middle);
-		sortVector(middle, end);
-		mergeVector(start, middle, end);
-	}
+void PmergeMe::mergeSortVector(int start, int end) {
+	if (start + 15 < end) {
+  	  int mid = start + (end - start) / 2;
+  	  mergeSortVector(start, mid);
+  	  mergeSortVector(mid + 1, end);
+  	  mergeVector(start, mid, end);
+  	}
 	else
 		insertionSortVector(start, end);
 }
 
 void	PmergeMe::beginSort()
 {
+	clock_t	t1 = 0 ,t2 = 0;
+
+	if (args.empty())
+		throw emptyArgs();
 	if (args.find_first_not_of(VALIDC) != std::string::npos)
 	{
 		std::cout << "arguments can only be with numbers and space" << '\n';
 		return ;
 	}
+	setList();
+	setVector();
+	std::cout << "before: ";
+	for (std::vector<long>::iterator it = vector.begin(); it != vector.end(); it++)
+		std::cout << *it << ' ';
+	std::cout << '\n';
+	t1 = clock();
+	mergeSortList(0, list.size() - 1);
+	t2 = clock();
+	std::cout << "Time to process a range of " << list.size() << " elements with std::list  : " << ((float)t2 - (float)t1) / 1000.0F << " ms" << '\n';
+	t1 = clock();
+	mergeSortVector(0, vector.size() - 1);
+	t2 = clock();
+	std::cout << "Time to process a range of " << vector.size() << " elements with std::vector  : " << ((float)t2 - (float)t1) / 1000.0F << " ms" << '\n';
+	std::cout << "after: ";
+	for (std::list<long>::iterator it = list.begin(); it != list.end(); it++)
+		std::cout << *it << ' ';
+	std::cout << '\n';
 }
 
