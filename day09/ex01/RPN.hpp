@@ -12,16 +12,26 @@ class RPN
 {
 public:
 	RPN();
-	RPN(std::string);
+	RPN(const char **);
 	RPN(const RPN&);
 	~RPN();
 
+
 	RPN &operator=(const RPN&);
 
-	std::stack<int>		getNumerals();
-	std::string			getRpnSequence();
+	void				setRpnSequence(const char **);
+	const std::string	&getRpnSequence() const;
 
 	void rpnSquenceStart();
+
+	class emptyArgs: public std::exception
+	{
+		public:
+			virtual const char* what() const throw()
+			{
+				return ("Error : no args");
+			}
+	};
 
 private:
 	std::string	rpnSequence;

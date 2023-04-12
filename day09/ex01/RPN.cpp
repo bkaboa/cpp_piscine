@@ -2,7 +2,9 @@
 
 RPN::RPN(){}
 
-RPN::RPN(std::string str):rpnSequence(str){}
+RPN::RPN(const char **argv) {
+	setRpnSequence(argv);
+}
 
 RPN::RPN(const RPN &rpn)
 {
@@ -11,27 +13,41 @@ RPN::RPN(const RPN &rpn)
 
 RPN::~RPN()
 {
+	rpnSequence.clear();
+}
+
+const std::string &RPN::getRpnSequence() const {
+	return (rpnSequence);
+}
+
+void	RPN::setRpnSequence(const char **argv)
+{
+	int i = 0;
+	int j = 0;
+
 	if (!rpnSequence.empty())
 		rpnSequence.clear();
-}
-
-std::stack<int> RPN::getNumerals(){
-	return (numerals);
-}
-
-std::string RPN::getRpnSequence(){
-	return (rpnSequence);
+	while (argv[++i])
+	{
+		j = 0;
+		while (argv[i][j])
+			rpnSequence.push_back(argv[i][j++]);
+		rpnSequence.push_back(' ');
+	}
+	if (rpnSequence.empty())
+	{
+		std::cout << "Error: rpn sequence not set" << '\n';
+		return ;
+	}
 }
 
 RPN	&RPN::operator=(const RPN &otherRpn)
 {
 	if (this != &otherRpn)
-	{
-		this->rpnSequence = getRpnSequence();
-		this->numerals = getNumerals();
-	}
+		rpnSequence = otherRpn.getRpnSequence();
 	return (*this);
 }
+
 
 void	RPN::rpnSquenceStart()
 {

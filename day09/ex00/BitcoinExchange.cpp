@@ -1,19 +1,12 @@
 #include "BitcoinExchange.hpp"
-#include <ctime>
-#include <string>
-#include <utility>
 
-btc::btc(){}
+btc::btc():strDataFile("data.csv") {}
 
-btc::btc(std::string strData)
-{
-	dataStrBtc = strData;
-}
+btc::btc(std::string strData):strDataFile(strData) {}
 
 btc::~btc()
 {
-	if (!dataStrBtc.empty())
-		dataStrBtc.clear();
+	strDataFile.clear();
 	exchange.clear();
 }
 
@@ -23,19 +16,16 @@ btc::btc(const btc &bitcoin){
 
 btc &btc::operator=(const btc &otherBitcoin){
 	if (this != &otherBitcoin)
-	{
-		this->dataStrBtc = otherBitcoin.getDataBtc();
-		this->exchange = otherBitcoin.getExchange();
-	}
+		this->strDataFile = otherBitcoin.getStrDataFile();
 	return (*this);
 }
 
-std::map<std::time_t, double> btc::getExchange() const{
-	return (exchange);
+const std::string	&btc::getStrDataFile() const{
+	return (strDataFile);
 }
 
-std::string	btc::getDataBtc() const{
-	return (dataStrBtc);
+void	btc::setStrDataFile(const char *arg) {
+	strDataFile = arg;
 }
 
 void	btc::printError(int error, std::string line)
@@ -98,7 +88,7 @@ int	btc::checkData(std::string line, int type, std::tm &tDate, double &price)
 	{
 		line2 = line.substr(11);
 		pos = line2.find_first_of('.');
-		if (pos >= 0)
+		if (pos != std::string::npos)
 			line2.replace(pos, 1, "0");
 		if (line2.find_first_not_of(delim) != std::string::npos)
 			return (2);
@@ -107,11 +97,10 @@ int	btc::checkData(std::string line, int type, std::tm &tDate, double &price)
 	else
 	{
 		line2 = line.substr(13);
-		pos = line2.find_first_of(line2, '-');
-		if (pos >= 0)
-			line2.replace(pos, 1, "0");
+		if (line2[0] == '-')
+			line2.replace(0, 1, "0");
 		pos = line2.find_first_of('.');
-		if (pos >= 0)
+		if (pos != std::string::npos)
 			line2.replace(pos, 1, "0");
 		if (line2.find_first_not_of(delim) != std::string::npos)
 			return (2);
@@ -125,32 +114,33 @@ int	btc::checkData(std::string line, int type, std::tm &tDate, double &price)
 	return (true);
 }
 
-void	btc::initmap(std::string strData)
+void	btc::setExchangeMap()
 {
 	double			price;
 	std::tm			tDate;
 	std::string		line;
-	std::ifstream	dataFile;
+	std::ifstream	file;
 
-	if (dataStrBtc.empty())
-		dataFile.open(dataStrBtc);
-	else
-		dataFile.open(strData);
-	if (!dataFile.is_open())
-		throw fileError("Error: file " + strData + " can't be opened");
+	if (strDataFile.empty())
+		throw strDataFileNotSet();
+	file.open(strDataFile);
+	if (!file.is_open())
+		throw fileError("Error: file " + strDataFile + " can't be opened");
+	if (exchange.empty())
+		exchange.clear();
 
 	tDate.tm_year = -1; tDate.tm_mon = -1; tDate.tm_mday = -1, price = -1;
-	std::getline(dataFile, line);
+	std::getline(file, line);
 	if (line != "date,exchange_rate")
 		throw dataBaseCorrupted();
 
-	while (!dataFile.eof())
+	while (!file.eof())
 	{
-		std::getline(dataFile, line);
+		std::getline(file, line);
 		if (checkData(line, DATABASE, tDate, price) != true)
 			throw dataBaseCorrupted();
 		exchange.insert(std::make_pair(std::mktime(&tDate), price));
-		dataFile.peek();
+		file.peek();
 	}
 }
 
@@ -160,9 +150,7 @@ void btc::printExchange(std::tm &tDate, double price)
 
 	double	dataPrice = exchange.begin()->second;
 	for (std::map<std::time_t, double>::iterator it = exchange.begin(); it != exchange.end() && time > it->first; it++)
-	{
 		dataPrice = it->second;
-	}
 	std::cout << tDate.tm_year << "-" << tDate.tm_mon << "-" << tDate.tm_mday << " => ";
 	std::cout << price << " = " << dataPrice * price << '\n';
 }
@@ -175,6 +163,7 @@ void btc::parseExchange(std::string strExchange)
 	std::string 	line;
 	std::ifstream	exchangeFile;
 
+	setExchangeMap();
 	exchangeFile.open(strExchange);
 	if (!exchangeFile.is_open())
 		throw fileError("Error: file " + strExchange + " can't be opened");
@@ -182,10 +171,7 @@ void btc::parseExchange(std::string strExchange)
 	tDate.tm_year = -1, tDate.tm_mon = -1, tDate.tm_mday = -1, price = -1;
 	std::getline(exchangeFile, line);
 	if (line != "date | value")
-	{
-		std::cout << "file not exchange dataBase" << '\n';
-		return ;
-	}
+		throw fileError("Error: file " + strExchange + " corrupted");
 
 	while (!exchangeFile.eof())
 	{

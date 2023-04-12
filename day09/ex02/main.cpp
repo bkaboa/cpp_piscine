@@ -2,8 +2,11 @@
 
 int main(const int argc, const char **argv)
 {
-	PmergeMe sort(argv);
-	PmergeMe truc;
-	truc = sort;
-	truc.beginSort();
+	if (argc >= 10000)
+	{
+		std::cout << "Error: are you crazy that's too much number" << '\n';
+		return (1);
+	}
+	PmergeMe insertMergeAlgo(argv);
+	insertMergeAlgo.beginSort();
 }

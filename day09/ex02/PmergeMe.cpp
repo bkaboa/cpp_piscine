@@ -72,6 +72,8 @@ void	PmergeMe::setArgs(const char **argv)
 	int i = 0;
 	int j = 0;
 
+	if (!args.empty())
+		args.clear();
 	while (argv[++i])
 	{
 		j = 0;
@@ -110,7 +112,6 @@ void	PmergeMe::insertionSortList(int start, int end)
 		while (j > start && getListAt(j - 1) > temp)
 		{
 			setListAt(j, getListAt(j - 1));
-			std::cout << getListAt(j) << '\n';
 			j--;
 		}
 		setListAt(j, temp);
@@ -181,7 +182,6 @@ void	PmergeMe::insertionSortVector(int start, int end)
 		while (j > start && vector[j - 1] > temp)
 		{
 			vector[j] = vector[j - 1];
-			std::cout << vector[j] << '\n';
 			j--;
 		}
 		vector[j] = temp;

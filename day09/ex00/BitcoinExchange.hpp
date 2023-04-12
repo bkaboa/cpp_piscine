@@ -6,9 +6,6 @@
 #include <string>
 #include <iostream>
 #include <map>
-#include <ctime>
-#include <limits>
-#include <stdexcept>
 
 # define DATABASE 1
 # define EXCHANGE 2
@@ -23,11 +20,11 @@ public:
 
 	btc	&operator=(const btc&);
 
-	std::string	getDataBtc() const;
-	std::map<std::time_t, double> getExchange() const;
+	const std::string	&getStrDataFile() const;
 
-	void	initmap(std::string = "data.csv");
 	void	parseExchange(std::string);
+
+	void	setStrDataFile(const char *);
 
 	class dataBaseCorrupted: public std::exception
 	{
@@ -43,13 +40,25 @@ public:
 		public:
 			fileError(const std::string &message) : std::ios_base::failure(message){}
 	};
+	class strDataFileNotSet: public std::exception
+	{
+		public:
+			virtual const char* what() const throw()
+			{
+				return ("Error: database string file, not setup");
+			}
+	};
 
 private:
+	void	setExchangeMap();
+
+	void	printError(int, std::string);
 	void	printExchange(std::tm&, double);
+
 	int		checkData(std::string, int, std::tm&, double&);
 	bool	checkValidDate(std::tm&);
-	void	printError(int, std::string);
-	std::string				dataStrBtc;
+
+	std::string						strDataFile;
 	std::map<std::time_t, double>	exchange;
 };
 
