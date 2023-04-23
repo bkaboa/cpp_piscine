@@ -30,7 +30,7 @@ public:
 		private:
 			std::string message;
 		public:
-			RpnError(std::string msg, int i = 0):message(msg) {}
+			RpnError(std::string msg):message(msg) {}
 			virtual ~RpnError() throw() {};
 			virtual const char* what() const throw()
 			{

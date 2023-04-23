@@ -46,14 +46,12 @@ RPN	&RPN::operator=(const RPN &otherRpn)
 void	RPN::rpnSquenceStart()
 {
 	int		number;
-	char	*str;
-	char	buffer[100];
 
 	if (rpnSequence.empty())
 		throw RpnError("Error: rpn sequence not set");
 	if (rpnSequence.find_first_not_of(VALIDC) != std::string::npos)
 		throw RpnError("Error: only numerals space and operators like +-/* are valid");
-	for (int i = 0; i < rpnSequence.length(); i++)
+	for (unsigned long i = 0; i < rpnSequence.length(); i++)
 	{
 		if (std::isalnum(rpnSequence[i]))
 		{

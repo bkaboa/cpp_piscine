@@ -17,7 +17,7 @@ $(NAME)	:	$(OBJ)
 	$(GPP) $(FLAGS) -o $@ $^
 
 %.o:%.cpp Makefile $(HEADER)
-	$(GPP) -o $@ -c $<
+	$(GPP) $(FLAGS) -o $@ -c $<
 
 clean	:
 	@rm $(OBJ) || true

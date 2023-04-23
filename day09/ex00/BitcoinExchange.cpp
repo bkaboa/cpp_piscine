@@ -86,7 +86,7 @@ int	btc::checkData(std::string line, int type, std::tm &tDate, double &price)
 	{
 		line2 = line.substr(11);
 		pos = line2.find_first_of('.');
-		if (pos != std::string::npos)
+		if ((unsigned long)pos != std::string::npos)
 			line2.replace(pos, 1, "0");
 		if (line2.find_first_not_of(delim) != std::string::npos)
 			return (2);
@@ -98,7 +98,7 @@ int	btc::checkData(std::string line, int type, std::tm &tDate, double &price)
 		if (line2[0] == '-')
 			line2.replace(0, 1, "0");
 		pos = line2.find_first_of('.');
-		if (pos != std::string::npos)
+		if ((unsigned long)pos != std::string::npos)
 			line2.replace(pos, 1, "0");
 		if (line2.find_first_not_of(delim) != std::string::npos)
 			return (2);
