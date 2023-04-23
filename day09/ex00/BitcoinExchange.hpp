@@ -6,6 +6,8 @@
 #include <string>
 #include <iostream>
 #include <map>
+#include <ctime>
+#include <cstdlib>
 
 # define DATABASE 1
 # define EXCHANGE 2

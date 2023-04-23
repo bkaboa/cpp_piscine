@@ -121,7 +121,7 @@ void	btc::setExchangeMap()
 
 	if (strDataFile.empty())
 		throw exceptionError("Error: database string file, not setup");
-	file.open(strDataFile);
+	file.open(strDataFile.c_str());
 	if (!file.is_open())
 		throw exceptionError("Error: file " + strDataFile + " can't be opened");
 	if (exchange.empty())
@@ -162,7 +162,7 @@ void btc::parseExchange(std::string strExchange)
 	std::ifstream	exchangeFile;
 
 	setExchangeMap();
-	exchangeFile.open(strExchange);
+	exchangeFile.open(strExchange.c_str());
 	if (!exchangeFile.is_open())
 		throw exceptionError("Error: file " + strExchange + " can't be opened");
 

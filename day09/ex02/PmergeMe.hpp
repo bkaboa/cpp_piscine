@@ -6,6 +6,7 @@
 #include <list>
 #include <vector>
 #include <exception>
+#include <cstdlib>
 
 #define VALIDC	"0123456789 "
 
