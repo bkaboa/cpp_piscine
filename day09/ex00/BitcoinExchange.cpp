@@ -4,11 +4,7 @@ btc::btc():strDataFile("data.csv") {}
 
 btc::btc(std::string strData):strDataFile(strData) {}
 
-btc::~btc()
-{
-	strDataFile.clear();
-	exchange.clear();
-}
+btc::~btc() {}
 
 btc::btc(const btc &bitcoin){
 	*this = bitcoin;
@@ -83,7 +79,8 @@ int	btc::checkData(std::string line, int type, std::tm &tDate, double &price)
 	if (line2.find_first_not_of(delim) != std::string::npos)
 		return (2);
 	tDate.tm_mday = std::atoi(line2.c_str());
-	checkValidDate(tDate);
+	if (checkValidDate(tDate) == false)
+		printError(3, line);
 	if (type == DATABASE)
 	{
 		line2 = line.substr(11);
@@ -122,23 +119,23 @@ void	btc::setExchangeMap()
 	std::ifstream	file;
 
 	if (strDataFile.empty())
-		throw strDataFileNotSet();
+		throw exceptionError("Error: database string file, not setup");
 	file.open(strDataFile);
 	if (!file.is_open())
-		throw fileError("Error: file " + strDataFile + " can't be opened");
+		throw exceptionError("Error: file " + strDataFile + " can't be opened");
 	if (exchange.empty())
 		exchange.clear();
 
 	tDate.tm_year = -1; tDate.tm_mon = -1; tDate.tm_mday = -1, price = -1;
 	std::getline(file, line);
 	if (line != "date,exchange_rate")
-		throw dataBaseCorrupted();
+		throw exceptionError("error : database corrupted");
 
 	while (!file.eof())
 	{
 		std::getline(file, line);
 		if (checkData(line, DATABASE, tDate, price) != true)
-			throw dataBaseCorrupted();
+			throw exceptionError("error : database corrupted");
 		exchange.insert(std::make_pair(std::mktime(&tDate), price));
 		file.peek();
 	}
@@ -166,12 +163,12 @@ void btc::parseExchange(std::string strExchange)
 	setExchangeMap();
 	exchangeFile.open(strExchange);
 	if (!exchangeFile.is_open())
-		throw fileError("Error: file " + strExchange + " can't be opened");
+		throw exceptionError("Error: file " + strExchange + " can't be opened");
 
 	tDate.tm_year = -1, tDate.tm_mon = -1, tDate.tm_mday = -1, price = -1;
 	std::getline(exchangeFile, line);
 	if (line != "date | value")
-		throw fileError("Error: file " + strExchange + " corrupted");
+		throw exceptionError("Error: file " + strExchange + " corrupted");
 
 	while (!exchangeFile.eof())
 	{

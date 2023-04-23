@@ -26,26 +26,16 @@ public:
 
 	void	setStrDataFile(const char *);
 
-	class dataBaseCorrupted: public std::exception
+	class exceptionError : virtual public std::exception
 	{
+		private:
+			std::string message;
 		public:
-			virtual const char* what() const throw()
+			exceptionError(const std::string &msg):message(msg) {}
+			virtual ~exceptionError() throw() {};
+			virtual const char *what() const throw()
 			{
-				return ("error : database corrupted");
-			}
-	};
-
-	class fileError: public std::ios_base::failure
-	{
-		public:
-			fileError(const std::string &message) : std::ios_base::failure(message){}
-	};
-	class strDataFileNotSet: public std::exception
-	{
-		public:
-			virtual const char* what() const throw()
-			{
-				return ("Error: database string file, not setup");
+				return (message.c_str());
 			}
 	};
 

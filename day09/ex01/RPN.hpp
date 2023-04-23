@@ -4,6 +4,7 @@
 #include <stack>
 #include <string>
 #include <iostream>
+#include <sstream>
 
 # define TOKEN "*/-+"
 # define VALIDC "0123456789 */-+"
@@ -24,12 +25,16 @@ public:
 
 	void rpnSquenceStart();
 
-	class emptyArgs: public std::exception
+	class RpnError: virtual public std::exception
 	{
+		private:
+			std::string message;
 		public:
+			RpnError(std::string msg, int i = 0):message(msg) {}
+			virtual ~RpnError() throw() {};
 			virtual const char* what() const throw()
 			{
-				return ("Error : no args");
+				return (message.c_str());
 			}
 	};
 

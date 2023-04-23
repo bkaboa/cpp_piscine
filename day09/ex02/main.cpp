@@ -7,6 +7,10 @@ int main(const int argc, const char **argv)
 		std::cout << "Error: are you crazy that's too much number" << '\n';
 		return (1);
 	}
-	PmergeMe insertMergeAlgo(argv);
-	insertMergeAlgo.beginSort();
+	try {
+		PmergeMe insertMergeAlgo(argv);
+		insertMergeAlgo.beginSort();
+	} catch (const std::exception &e) {
+		std::cout << e.what() << '\n';
+	}
 }

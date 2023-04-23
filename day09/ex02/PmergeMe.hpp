@@ -5,6 +5,7 @@
 #include <iostream>
 #include <list>
 #include <vector>
+#include <exception>
 
 #define VALIDC	"0123456789 "
 
@@ -22,6 +23,19 @@ public:
 	PmergeMe &operator=(const PmergeMe&);
 
 	void	beginSort();
+
+	class PmergeMeError : virtual public std::exception
+	{
+		private:
+			std::string message;
+		public:
+			PmergeMeError(std::string msg):message(msg) {}
+			virtual ~PmergeMeError() throw() {};
+			virtual const char* what() const throw()
+			{
+				return (message.c_str());
+			}
+	};
 
 	class emptyArgs: public std::exception
 	{

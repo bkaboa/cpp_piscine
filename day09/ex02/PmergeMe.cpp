@@ -13,11 +13,7 @@ PmergeMe::PmergeMe(const PmergeMe &otherPmergeMe) {
 	*this = otherPmergeMe;
 }
 
-PmergeMe::~PmergeMe() {
-	args.clear();
-	vector.clear();
-	list.clear();
-}
+PmergeMe::~PmergeMe() {}
 
 const std::string	&PmergeMe::getArgs() const {
 	return (args);
@@ -27,7 +23,7 @@ long	PmergeMe::getListAt(int index)
 {
 	std::list<long>::iterator it = list.begin();
 	if (index < 0 || index > static_cast<int>(list.size()))
-		throw std::out_of_range("index out of range");
+		throw PmergeMeError("index out of range");
 	for (int i = 0; i < index; i++)
 		it++;
 	return (*it);
@@ -35,36 +31,44 @@ long	PmergeMe::getListAt(int index)
 
 void		PmergeMe::setVector()
 {
+	int number;
+
 	if (!vector.empty())
 		vector.clear();
 	for (std::string::iterator it = args.begin(); it != args.end(); it++)
 	{
 		if (std::isalnum(*it))
 		{
-			vector.push_back(std::atoi((const char*)it.base()));
+			if ((number = std::atoi((const char*)it.base())) < 0)
+				throw PmergeMeError("only positive numbers are valid");
+			vector.push_back(number);
 			while (it < args.end() && std::isalnum(*it))
 				it++;
 		}
 	}
 	if (vector.empty())
-		throw onlySpaceInString();
+		throw PmergeMeError("Error : only spce with no numbers are present in argv");
 }
 
 void	PmergeMe::setList()
 {
+	int number;
+
 	if (!list.empty())
 		list.clear();
 	for (std::string::iterator it = args.begin(); it != args.end(); it++)
 	{
 		if (std::isalnum(*it))
 		{
-			list.push_back(std::atoi((const char*)it.base()));
+			if ((number = std::atoi((const char*)it.base())) < 0)
+				throw PmergeMeError("only positive numbers are valid");
+			list.push_back(number);
 			while (it < args.end() && std::isalnum(*it))
 				it++;
 		}
 	}
 	if (list.empty())
-		throw onlySpaceInString();
+		throw PmergeMeError("Error : only spce with no numbers are present in argv");
 }
 
 void	PmergeMe::setArgs(const char **argv)
@@ -82,13 +86,13 @@ void	PmergeMe::setArgs(const char **argv)
 		args.push_back(' ');
 	}
 	if (args.empty())
-		throw emptyArgs();
+		throw PmergeMeError("Error : no args");
 }
 
 void	PmergeMe::setListAt(int index, long num)
 {
 	if (index < 0 || index >= static_cast<int>(list.size()))	
-		throw std::out_of_range("index out of range");
+		throw PmergeMeError("index out of range");
 	std::list<long>::iterator it = list.begin();
 	for (int i = 0; i < index; i++)
 		it++;
@@ -245,7 +249,8 @@ void	PmergeMe::beginSort()
 	clock_t	t1 = 0 ,t2 = 0;
 
 	if (args.empty())
-		throw emptyArgs();
+		throw PmergeMeError("Error : no args");
+;
 	if (args.find_first_not_of(VALIDC) != std::string::npos)
 	{
 		std::cout << "arguments can only be with numbers and space" << '\n';
