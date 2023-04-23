@@ -5,6 +5,7 @@
 #include <string>
 #include <iostream>
 #include <sstream>
+#include <cstdlib>
 
 # define TOKEN "*/-+"
 # define VALIDC "0123456789 */-+"
