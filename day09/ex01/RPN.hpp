@@ -41,7 +41,7 @@ public:
 private:
 	std::string	rpnSequence;
 
-	std::stack<int> numerals;
+	std::stack<float> numerals;
 };
 
 #endif

@@ -32,6 +32,7 @@ void	btc::printError(int error, std::string line)
 		case 3: std::cout << "Error: not a positive number." << '\n';
 			break;
 		case 4: std::cout << "Error: too large a number." << '\n';
+			break;
 	}
 }
 
@@ -80,7 +81,7 @@ int	btc::checkData(std::string line, int type, std::tm &tDate, double &price)
 		return (2);
 	tDate.tm_mday = std::atoi(line2.c_str());
 	if (checkValidDate(tDate) == false)
-		printError(3, line);
+		return (3);
 	if (type == DATABASE)
 	{
 		line2 = line.substr(11);
@@ -169,7 +170,6 @@ void btc::parseExchange(std::string strExchange)
 	std::getline(exchangeFile, line);
 	if (line != "date | value")
 		throw exceptionError("Error: file " + strExchange + " corrupted");
-
 	while (!exchangeFile.eof())
 	{
 		std::getline(exchangeFile, line);

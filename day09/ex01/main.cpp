@@ -4,7 +4,7 @@ int main(int argc, const char **argv)
 {
 	if (argc != 2)
 	{
-		std::cout << "this program must have at least one argument" << '\n';
+		std::cout << "this program must have one argument" << '\n';
 		return (1);
 	}
 	try {
