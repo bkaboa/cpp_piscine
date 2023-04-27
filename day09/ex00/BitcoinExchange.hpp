@@ -50,13 +50,14 @@ private:
 	void	setExchangeMap();
 
 	void	printError(int, std::string);
-	void	printExchange(std::tm, double);
+	void	printExchange(double, std::string);
 
-	int		checkData(std::string, int, std::tm&, double&);
-	bool	checkValidDate(std::tm&);
+	int		checkData(std::string, int, double&);
+	bool	checkValidDate();
 
-	std::string						strDataFile;
-	std::map<time_t, sData>	exchange;
+	std::string				strDataFile;
+	std::map<long, sData>	exchange;
+	long					date[3];
 };
 
 #endif // !BITCOINEXCHANGE

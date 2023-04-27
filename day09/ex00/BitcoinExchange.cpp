@@ -36,29 +36,29 @@ void	btc::printError(int error, std::string line)
 	}
 }
 
-bool	btc::checkValidDate(std::tm &tDate)
+bool	btc::checkValidDate()
 {
-	if (tDate.tm_year == -1 || tDate.tm_mon == -1 || tDate.tm_mday == -1)
+	if (date[0] == -1 || date[0] == -1 || date[0] == -1)
 		return (false);
-	if (tDate.tm_year < 2008 || tDate.tm_year > 2023)
+	if (date[0] < 2008 || date[0] > 2023)
 		return (false);
-	if (tDate.tm_mon > 12 || tDate.tm_mon == 0)
+	if (date[1] > 12 || date[1] == 0)
 		return (false);
-	if (tDate.tm_mday > 31 || tDate.tm_mday == 0)
+	if (date[2] > 31 || date[2] == 0)
 		return (false);
-	if (tDate.tm_mday == 31 && (tDate.tm_mon == 4 || tDate.tm_mon == 6 || tDate.tm_mon == 9 || tDate.tm_mon == 11))
+	if (date[2] == 31 && (date[1] == 4 || date[1] == 6 || date[1] == 9 || date[1] == 11))
 		return (false);
-	if (tDate.tm_mon == 2)
+	if (date[1] == 2)
 	{
-		if (tDate.tm_mday > 29)
+		if (date[2] > 29)
 			return (false);
-		if (tDate.tm_mday == 29 && (tDate.tm_year % 100) % 4 != 0)
+		if (date[2] == 29 && (date[0] % 100) % 4 != 0)
 			return (false);
 	}
 	return (true);
 }
 
-int	btc::checkData(std::string line, int type, std::tm &tDate, double &price)
+int	btc::checkData(std::string line, int type, double &price)
 {
 	const char	*delim = "0123456789";
 	std::string	line2;
@@ -71,16 +71,16 @@ int	btc::checkData(std::string line, int type, std::tm &tDate, double &price)
 	line2 = line.substr(0, 4);
 	if (line2.find_first_not_of(delim) != std::string::npos)
 		return (2);
-	tDate.tm_year = std::atoi(line2.c_str());
+	date[0] = std::atoi(line2.c_str());
 	line2 = line.substr(5, 2);
 	if (line2.find_first_not_of(delim) != std::string::npos)
 		return (2);
-	tDate.tm_mon = std::atoi(line2.c_str());
+	date[1] = std::atoi(line2.c_str());
 	line2 = line.substr(8, 2);
 	if (line2.find_first_not_of(delim) != std::string::npos)
 		return (2);
-	tDate.tm_mday = std::atoi(line2.c_str());
-	if (checkValidDate(tDate) == false)
+	date[2] = std::atoi(line2.c_str());
+	if (checkValidDate() == false)
 		return (2);
 	if (type == DATABASE)
 	{
@@ -115,7 +115,6 @@ int	btc::checkData(std::string line, int type, std::tm &tDate, double &price)
 void	btc::setExchangeMap()
 {
 	double			price;
-	std::tm			tDate;
 	std::string		line;
 	std::ifstream	file;
 	sData			data;
@@ -128,43 +127,41 @@ void	btc::setExchangeMap()
 	if (exchange.empty())
 		exchange.clear();
 
-	tDate.tm_year = -1; tDate.tm_mon = -1; tDate.tm_mday = -1, price = -1;
 	std::getline(file, line);
 	if (line != "date,exchange_rate")
 		throw exceptionError("error : database corrupted");
 
 	while (!file.eof())
 	{
+		date[0] = -1; date[1] = -1; date[2] = -1;
 		std::getline(file, line);
-		if (checkData(line, DATABASE, tDate, price) != true)
+		if (checkData(line, DATABASE, price) != true)
 			throw exceptionError("error : database corrupted");
 		data.price = price;
 		data.date =	line;
-		exchange.insert(std::pair<time_t, sData>(std::mktime(&tDate) / 864000, data));
+		date[0] = date[0] * 100 + date[1];
+		date[0] = date[0] * 100 + date[2];
+		exchange.insert(std::pair<long, sData>(date[0], data));
 		file.peek();
 	}
 }
 
-void btc::printExchange(std::tm tDate, double price)
+void btc::printExchange(double price, std::string line)
 {
-	std::cout << tDate.tm_year << "-" << tDate.tm_mon << "-" << tDate.tm_mday << " => " << '\n';
-	std::time_t time = mktime(&tDate) / 864000;
-	std::cout << tDate.tm_year << "-" << tDate.tm_mon << "-" << tDate.tm_mday << " => " << '\n';
-	std::map<time_t, sData>::iterator it = exchange.begin();
+	std::map<long, sData>::iterator it = exchange.begin();
+	date[0] = date[0] * 100 + date[1];
+	date[0] = date[0] * 100 + date[2];
 
 	double	dataPrice = exchange.begin()->second.price;
-	for (; it != exchange.end() && time >= it->first; ++it)
+	for (; it != exchange.end() && date[0] >= it->first; ++it)
 		dataPrice = it->second.price;
-	std::cout << time << '\n' << it->first << '\n';
-	std::cout << time << " " << it->first << '\n';
-	std::cout << tDate.tm_year << "-" << tDate.tm_mon << "-" << tDate.tm_mday << " => ";
+	std::cout << line.substr(0,10) << " => ";
 	std::cout << price << " = " << dataPrice * price << '\n';
 }
 
 void btc::parseExchange(std::string strExchange)
 {
 	double			price;
-	std::tm			tDate;
 	int				error = 0;
 	std::string 	line;
 	std::ifstream	exchangeFile;
@@ -174,16 +171,16 @@ void btc::parseExchange(std::string strExchange)
 	if (!exchangeFile.is_open())
 		throw exceptionError("Error: file " + strExchange + " can't be opened");
 
-	tDate.tm_year = -1, tDate.tm_mon = -1, tDate.tm_mday = -1, price = -1;
 	std::getline(exchangeFile, line);
 	if (line != "date | value")
 		throw exceptionError("Error: file " + strExchange + " corrupted");
 	while (!exchangeFile.eof())
 	{
+		date[0] = -1; date[1] = -1; date[2] = -1;
 		std::getline(exchangeFile, line);
-		error = checkData(line, EXCHANGE, tDate, price);
+		error = checkData(line, EXCHANGE, price);
 		if (error == true)
-			printExchange(tDate, price);
+			printExchange(price, line);
 		else
 			printError(error, line);
 		exchangeFile.peek();
