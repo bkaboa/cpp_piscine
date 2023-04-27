@@ -81,7 +81,7 @@ int	btc::checkData(std::string line, int type, std::tm &tDate, double &price)
 		return (2);
 	tDate.tm_mday = std::atoi(line2.c_str());
 	if (checkValidDate(tDate) == false)
-		return (3);
+		return (2);
 	if (type == DATABASE)
 	{
 		line2 = line.substr(11);
@@ -118,6 +118,7 @@ void	btc::setExchangeMap()
 	std::tm			tDate;
 	std::string		line;
 	std::ifstream	file;
+	sData			data;
 
 	if (strDataFile.empty())
 		throw exceptionError("Error: database string file, not setup");
@@ -137,18 +138,25 @@ void	btc::setExchangeMap()
 		std::getline(file, line);
 		if (checkData(line, DATABASE, tDate, price) != true)
 			throw exceptionError("error : database corrupted");
-		exchange.insert(std::make_pair(std::mktime(&tDate), price));
+		data.price = price;
+		data.date =	line;
+		exchange.insert(std::pair<time_t, sData>(std::mktime(&tDate) / 864000, data));
 		file.peek();
 	}
 }
 
-void btc::printExchange(std::tm &tDate, double price)
+void btc::printExchange(std::tm tDate, double price)
 {
-	std::time_t time = mktime(&tDate);
+	std::cout << tDate.tm_year << "-" << tDate.tm_mon << "-" << tDate.tm_mday << " => " << '\n';
+	std::time_t time = mktime(&tDate) / 864000;
+	std::cout << tDate.tm_year << "-" << tDate.tm_mon << "-" << tDate.tm_mday << " => " << '\n';
+	std::map<time_t, sData>::iterator it = exchange.begin();
 
-	double	dataPrice = exchange.begin()->second;
-	for (std::map<std::time_t, double>::iterator it = exchange.begin(); it != exchange.end() && time > it->first; it++)
-		dataPrice = it->second;
+	double	dataPrice = exchange.begin()->second.price;
+	for (; it != exchange.end() && time >= it->first; ++it)
+		dataPrice = it->second.price;
+	std::cout << time << '\n' << it->first << '\n';
+	std::cout << time << " " << it->first << '\n';
 	std::cout << tDate.tm_year << "-" << tDate.tm_mon << "-" << tDate.tm_mday << " => ";
 	std::cout << price << " = " << dataPrice * price << '\n';
 }

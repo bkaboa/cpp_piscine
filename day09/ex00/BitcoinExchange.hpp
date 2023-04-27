@@ -12,6 +12,11 @@
 # define DATABASE 1
 # define EXCHANGE 2
 
+typedef struct data{
+	std::string date;
+	double price;
+} sData;
+
 class btc
 {
 public:
@@ -45,13 +50,13 @@ private:
 	void	setExchangeMap();
 
 	void	printError(int, std::string);
-	void	printExchange(std::tm&, double);
+	void	printExchange(std::tm, double);
 
 	int		checkData(std::string, int, std::tm&, double&);
 	bool	checkValidDate(std::tm&);
 
 	std::string						strDataFile;
-	std::map<std::time_t, double>	exchange;
+	std::map<time_t, sData>	exchange;
 };
 
 #endif // !BITCOINEXCHANGE
