@@ -1,5 +1,6 @@
 #include "PmergeMe.hpp"
 #include <cctype>
+#include <cstdlib>
 #include <ctime>
 #include <iterator>
 #include <stdexcept>
@@ -23,44 +24,50 @@ const std::string	&PmergeMe::getArgs() const {
 
 void		PmergeMe::setVector()
 {
-	int number;
+	long		number;
+	char	*end;
 
 	if (!vector.empty())
 		vector.clear();
 	for (std::string::iterator it = args.begin(); it != args.end(); it++)
 	{
-		if (std::isalnum(*it))
-		{
-			if ((number = std::atoi((const char*)it.base())) < 0)
-				throw PmergeMeError("only positive numbers are valid");
-			vector.push_back(number);
-			while (it < args.end() && std::isalnum(*it))
-				it++;
-		}
+		number = std::strtol(it.base(), &end, 10);
+		if (number == 0 && !std::isdigit(*it.base()))
+			throw PmergeMeError("Error : syntax");
+		if (it.base() == end)
+			break;
+		if (number < 0)
+			throw PmergeMeError("Error : only positive number are valid");
+		vector.push_back(number);
+		while (it.base() != end)
+			it++;
 	}
 	if (vector.empty())
-		throw PmergeMeError("Error : only spce with no numbers are present in argv");
+		throw PmergeMeError("Error : no numbers in args");
 }
 
 void	PmergeMe::setList()
 {
-	int number;
+	long	number;
+	char	*end;
 
 	if (!list.empty())
 		list.clear();
 	for (std::string::iterator it = args.begin(); it != args.end(); it++)
 	{
-		if (std::isalnum(*it))
-		{
-			if ((number = std::atoi((const char*)it.base())) < 0)
-				throw PmergeMeError("only positive numbers are valid");
-			list.push_back(number);
-			while (it < args.end() && std::isalnum(*it))
-				it++;
-		}
+		number = std::strtol(it.base(), &end, 10);
+		if (number == 0 && !std::isdigit(*it.base()))
+			throw PmergeMeError("Error : syntax");
+		if (it.base() == end)
+			break;
+		if (number < 0)
+			throw PmergeMeError("Error : only positive number are valid");
+		list.push_back(number);
+		while (it.base() != end)
+			it++;
 	}
 	if (list.empty())
-		throw PmergeMeError("Error : only spce with no numbers are present in argv");
+		throw PmergeMeError("Error : no numbers in args");
 }
 
 void	PmergeMe::setArgs(const char **argv)
@@ -131,11 +138,6 @@ void	PmergeMe::beginSort()
 
 	if (args.empty())
 		throw PmergeMeError("Error : no args");
-	if (args.find_first_not_of(VALIDC) != std::string::npos)
-	{
-		std::cout << "arguments can only be with numbers and space" << '\n';
-		return ;
-	}
 	setList();
 	setVector();
 	std::cout << "before: ";
