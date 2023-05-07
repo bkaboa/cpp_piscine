@@ -7,6 +7,7 @@
 #include <vector>
 #include <exception>
 #include <cstdlib>
+#include <algorithm>
 
 #define VALIDC	"0123456789 "
 
@@ -57,19 +58,15 @@ public:
 	};
 
 private:
-	void	insertionSortVector(int, int);
-	void	mergeVector(int, int, int);
-	void	mergeSortVector(int, int);
 
-	void	insertionSortList(int, int);
-	void	mergeList(int, int, int);
-	void	mergeSortList(int, int);
+	template<class Iter>
+	void	mergeSort(Iter, Iter);
+
+	template<class Iter>
+	void	insertionSort(Iter, Iter);
 
 	void	setList();
 	void	setVector();
-
-	void	setListAt(int, long);
-	long	getListAt(int);
 
 	std::string			args;
 	std::vector<long>	vector;

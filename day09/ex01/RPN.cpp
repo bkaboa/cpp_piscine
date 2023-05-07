@@ -24,6 +24,8 @@ void	RPN::setRpnSequence(const char **argv)
 
 	if (!rpnSequence.empty())
 		rpnSequence.clear();
+	if (rpnSequence.empty())
+		throw RpnError("Error: rpn sequence not set");
 	while (argv[++i])
 	{
 		j = 0;
@@ -31,8 +33,6 @@ void	RPN::setRpnSequence(const char **argv)
 			rpnSequence.push_back(argv[i][j++]);
 		rpnSequence.push_back(' ');
 	}
-	if (rpnSequence.empty())
-		throw RpnError("Error: rpn sequence not set");
 }
 
 RPN	&RPN::operator=(const RPN &otherRpn)
@@ -45,10 +45,8 @@ RPN	&RPN::operator=(const RPN &otherRpn)
 
 void	RPN::rpnSquenceStart()
 {
-	int		number;
+	float		number;
 
-	if (rpnSequence.empty())
-		throw RpnError("Error: rpn sequence not set");
 	if (rpnSequence.find_first_not_of(VALIDC) != std::string::npos)
 		throw RpnError("Error: only numerals space and operators like +-/* are valid");
 	for (unsigned long i = 0; i < rpnSequence.length(); i++)

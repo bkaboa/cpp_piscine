@@ -2,7 +2,7 @@
 
 int main(const int argc, const char **argv)
 {
-	if (argc >= 10000)
+	if (argc == 1)
 	{
 		std::cout << "Error: are you crazy that's too much number" << '\n';
 		return (1);
