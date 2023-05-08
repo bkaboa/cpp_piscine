@@ -7,7 +7,7 @@ SRC 	:= main.cpp	\
 
 OBJ 	:= $(SRC:.cpp=.o)
 
-FLAGS	:=	-Wall -Wextra -Werror -std=c++98 -fsanitize=address -g3
+FLAGS	:=	-Wall -Wextra -Werror -std=c++98
 
 GPP		:=	c++
 

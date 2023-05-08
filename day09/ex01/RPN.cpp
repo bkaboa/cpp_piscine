@@ -19,20 +19,9 @@ const std::string &RPN::getRpnSequence() const {
 
 void	RPN::setRpnSequence(const char **argv)
 {
-	int i = 0;
-	int j = 0;
-
-	if (!rpnSequence.empty())
-		rpnSequence.clear();
+	rpnSequence = argv[1];
 	if (rpnSequence.empty())
-		throw RpnError("Error: rpn sequence not set");
-	while (argv[++i])
-	{
-		j = 0;
-		while (argv[i][j])
-			rpnSequence.push_back(argv[i][j++]);
-		rpnSequence.push_back(' ');
-	}
+		throw RpnError("Error : rpn sequence not set");
 }
 
 RPN	&RPN::operator=(const RPN &otherRpn)

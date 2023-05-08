@@ -39,24 +39,6 @@ public:
 			}
 	};
 
-	class emptyArgs: public std::exception
-	{
-		public:
-			virtual const char* what() const throw()
-			{
-				return ("Error : no args");
-			}
-	};
-
-	class onlySpaceInString: public std::exception
-	{
-		public:
-			virtual const char* what() const throw()
-			{
-				return ("Error : only spce with no numbers are present in argv");
-			}
-	};
-
 private:
 
 	template<class Iter>

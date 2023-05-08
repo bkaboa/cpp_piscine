@@ -24,15 +24,16 @@ const std::string	&PmergeMe::getArgs() const {
 
 void		PmergeMe::setVector()
 {
-	long		number;
+	long	number;
 	char	*end;
+	std::string::iterator it = args.begin();
 
 	if (!vector.empty())
 		vector.clear();
-	for (std::string::iterator it = args.begin(); it != args.end(); it++)
+	for (; it != args.end(); it++)
 	{
 		number = std::strtol(it.base(), &end, 10);
-		if (number == 0 && !std::isdigit(*it.base()))
+		if (!std::isspace(*end) && !std::isdigit(*end))
 			throw PmergeMeError("Error : syntax");
 		if (it.base() == end)
 			break;
@@ -50,13 +51,14 @@ void	PmergeMe::setList()
 {
 	long	number;
 	char	*end;
+	std::string::iterator it = args.begin();
 
 	if (!list.empty())
 		list.clear();
-	for (std::string::iterator it = args.begin(); it != args.end(); it++)
+	for (; it != args.end(); it++)
 	{
 		number = std::strtol(it.base(), &end, 10);
-		if (number == 0 && !std::isdigit(*it.base()))
+		if (!std::isspace(*end) && !std::isdigit(*end))
 			throw PmergeMeError("Error : syntax");
 		if (it.base() == end)
 			break;
