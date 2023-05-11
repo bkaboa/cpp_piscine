@@ -66,6 +66,8 @@ void	RPN::rpnSquenceStart()
 			}
 		}
 	}
+	if (numerals.empty())
+		throw RpnError("Error : rpn sequence not set");
 	if (numerals.size() > 1)
 	{
 		std::stringstream out;

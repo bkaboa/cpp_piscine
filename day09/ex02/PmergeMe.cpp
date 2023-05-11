@@ -137,6 +137,7 @@ void	PmergeMe::insertionSort(Iter start, Iter end)
 void	PmergeMe::beginSort()
 {
 	clock_t	t1 = 0 ,t2 = 0;
+	float t3 = 0, t4 = 0;
 
 	if (args.empty())
 		throw PmergeMeError("Error : no args");
@@ -149,14 +150,16 @@ void	PmergeMe::beginSort()
 	t1 = clock();
 	mergeSort(list.begin(), list.end());
 	t2 = clock();
-	std::cout << "Time to process a range of " << list.size() << " elements with std::list  : " << ((float)t2 - (float)t1) / 1000.0F << " ms" << '\n';
+	t3 = ((float)t2 - (float)t1) / 1000.0F;
 	t1 = clock();
 	mergeSort(vector.begin(), vector.end());
 	t2 = clock();
-	std::cout << "Time to process a range of " << vector.size() << " elements with std::vector  : " << ((float)t2 - (float)t1) / 1000.0F << " ms" << '\n';
+	t4 = ((float)t2 - (float)t1) / 1000.0F;
 	std::cout << "after: ";
 	for (std::list<long>::iterator it = list.begin(); it != list.end(); it++)
 		std::cout << *it << ' ';
-	std::cout << '\n';
+	std::cout << std::endl;
+	std::cout << "Time to process a range of " << list.size() << " elements with std::list  : " << t3 << " ms" << '\n';
+	std::cout << "Time to process a range of " << vector.size() << " elements with std::vector  : " << t4 << " ms" << '\n';
 }
 

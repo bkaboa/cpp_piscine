@@ -68,6 +68,13 @@ int	btc::checkData(std::string line, int type, double &price)
 		return (2);
 	if (type == EXCHANGE && line.length() < 14)
 		return (2);
+	std::cout << line[4] << '\n' << line[7] << '\n' << line[10] << '\n' << line[10] << line[10] << line[11] << line[12] << '\n';
+	if (line[4] != '-' || line[7] != '-')
+		return (2);
+	if (type == DATABASE && line[10] != ',')
+		return (2);
+	if (type == EXCHANGE && line.compare(10, 3, " | "))
+		return (2);
 	line2 = line.substr(0, 4);
 	if (line2.find_first_not_of(delim) != std::string::npos)
 		return (2);

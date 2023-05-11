@@ -4,7 +4,7 @@ int main(int argc, char **argv)
 {
 	if (argc != 2)
 	{
-		std::cout << "too many argument" << '\n';
+		std::cout << "Error: only one argument is needed like ./\"exec\" \"file_name\"" << '\n';
 		return (1);
 	}
 	try {
